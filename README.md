@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> Safe travels is still under construction. 
+
 # Safe Travels
 
 Safe Travels is a privacy oriented travel platform for self hosting.
