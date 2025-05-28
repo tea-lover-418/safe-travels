@@ -15,7 +15,13 @@ This whole repo is setup using Turborepo.
 
 ## Development
 
+### Web
+
 `npm i` & `npm run dev` should take care of everything.
+
+### Android
+
+Make sure you are also running web, as this contains the API.
 
 ### Apps and Packages
 
