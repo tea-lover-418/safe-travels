@@ -29,10 +29,10 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
             val context = getApplication<Application>()
 
             val hasPermission =
-                    ContextCompat.checkSelfPermission(
-                            context,
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                    ) == PackageManager.PERMISSION_GRANTED
+                ContextCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
 
             if (!hasPermission) {
                 _location.value = Pair("No permission", "No permission")
@@ -41,18 +41,18 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
 
             try {
                 val location =
-                        LocationServices.getFusedLocationProviderClient(context)
-                                .getCurrentLocation(
-                                        com.google.android.gms.location.Priority
-                                                .PRIORITY_HIGH_ACCURACY,
-                                        null
-                                )
-                                .await()
+                    LocationServices.getFusedLocationProviderClient(context)
+                        .getCurrentLocation(
+                            com.google.android.gms.location.Priority
+                                .PRIORITY_HIGH_ACCURACY,
+                            null
+                        )
+                        .await()
 
                 location?.let {
                     _location.value = Pair(it.latitude.toString(), it.longitude.toString())
                 }
-                        ?: run { _location.value = Pair("Unavailable", "Unavailable") }
+                    ?: run { _location.value = Pair("Unavailable", "Unavailable") }
             } catch (e: Exception) {
                 _location.value = Pair("Error", "Error")
             }
