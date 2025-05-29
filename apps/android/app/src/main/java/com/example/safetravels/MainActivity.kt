@@ -29,7 +29,8 @@ class MainActivity : ComponentActivity() {
     private val locationPermissions =
         arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
         )
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -53,21 +54,20 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     topBar = { TopAppBar(title = { Text("Current Location") }) }
                 ) { innerPadding ->
-                    Column(
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .padding(16.dp)
-                    ) {
+                    Column(modifier = Modifier
+                        .padding(innerPadding)
+                        .padding(16.dp)) {
                         Text("Latitude: ${location.value.first}")
                         Spacer(modifier = Modifier.height(8.dp))
                         Text("Longitude: ${location.value.second}")
                         Spacer(modifier = Modifier.height(16.dp))
-                        Button(onClick = {
-                            val workRequest = OneTimeWorkRequestBuilder<LocationWorker>().build()
-                            WorkManager.getInstance(context).enqueue(workRequest)
-                        }) {
-                            Text("Send Location Now")
-                        }
+                        Button(
+                            onClick = {
+                                val workRequest =
+                                    OneTimeWorkRequestBuilder<LocationWorker>().build()
+                                WorkManager.getInstance(context).enqueue(workRequest)
+                            }
+                        ) { Text("Send Location Now") }
                     }
                 }
             }
