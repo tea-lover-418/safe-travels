@@ -12,15 +12,17 @@
   },
   "dependencies": {
     "@safe-travels/ui": "*",
+    "leaflet": "^1.9.4",
     "mongodb": "^6.16.0",
     "next": "^15.3.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-leaflet": "^5.0.0"
   },
   "devDependencies": {
     "@safe-travels/eslint-config": "*",
-    "@safe-travels/typescript-config": "*",
     "@safe-travels/models": "*",
+    "@safe-travels/typescript-config": "*",
     "@types/node": "^22.15.3",
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.1",

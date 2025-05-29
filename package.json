@@ -10,6 +10,7 @@
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.18",
     "prettier": "^3.5.3",
     "turbo": "^2.5.3",
     "typescript": "5.8.2"
@@ -25,5 +26,8 @@
   },
   "volta": {
     "node": "22.14.0"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13"
   }
 }
