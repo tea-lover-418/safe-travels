@@ -33,7 +33,7 @@ const Map: FC<Props> = ({ locations }) => {
   const mapPosition = [
     locations[locations.length - 1]?.latitude,
     locations[locations.length - 1]?.longitude,
-  ];
+  ] as [number, number];
 
   return (
     isClient && (

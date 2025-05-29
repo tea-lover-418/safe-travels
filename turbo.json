@@ -1,6 +1,10 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "ui": "tui",
+  "globalEnv": [
+    "MONGODB_CONNECTION_STRING",
+    "MONGO_DB_NAME"
+  ],
   "tasks": {
     "build": {
       "dependsOn": [
