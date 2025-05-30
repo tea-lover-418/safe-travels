@@ -5,6 +5,8 @@ import { locationCollection } from "../db/collections";
 import { Location } from "@safe-travels/models/location";
 import { Metadata } from "next";
 
+export const revalidate = 10;
+
 const getData = async () => {
   const client = await getDbClient();
 

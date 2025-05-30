@@ -3,7 +3,8 @@
   "ui": "tui",
   "globalEnv": [
     "MONGODB_CONNECTION_STRING",
-    "MONGO_DB_NAME"
+    "MONGO_DB_NAME",
+    "HOME_COORDS"
   ],
   "tasks": {
     "build": {
