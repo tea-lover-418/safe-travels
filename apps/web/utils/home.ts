@@ -1,7 +1,7 @@
 import { Location } from "@safe-travels/models/location";
 import { serverConfig } from "../config";
 
-const splitCoordinates = serverConfig.home?.split(";");
+const splitCoordinates = serverConfig.home?.split(",");
 
 const latitude = splitCoordinates?.[0]
   ? parseFloat(splitCoordinates[0] || "")

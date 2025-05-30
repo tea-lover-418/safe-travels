@@ -4,6 +4,8 @@ import { getDbClient } from "../db";
 import { locationCollection } from "../db/collections";
 import { Location } from "@safe-travels/models/location";
 import { Metadata } from "next";
+import { home } from "../utils/home";
+import { isWithin100Meters } from "../utils/coordinates";
 
 export const revalidate = 10;
 
@@ -17,7 +19,11 @@ const getData = async () => {
 
   // _id is not JSON serializable so we strip it off
   return {
-    locations: locations.map(({ _id, ...rest }) => rest),
+    locations: locations
+      .map(({ _id, ...rest }) => rest)
+      .filter((location) => {
+        return home ? !isWithin100Meters(home, location) : true; // tmp until the server properly rejects
+      }),
   };
 };
 

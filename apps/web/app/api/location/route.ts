@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     });
   }
 
-  console.log("inserting", location);
+  console.info("inserting", location);
 
   const res = await insertLocation(location);
 
