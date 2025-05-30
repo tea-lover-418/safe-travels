@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
+
 import "./globals.css";
 
 const geistSans = localFont({
@@ -23,6 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Analytics />
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>

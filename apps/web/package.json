@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@safe-travels/ui": "*",
+    "@vercel/analytics": "^1.5.0",
     "leaflet": "^1.9.4",
     "mongodb": "^6.16.0",
     "next": "^15.3.0",
