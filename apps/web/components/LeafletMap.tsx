@@ -12,7 +12,13 @@ L.Icon.Default.mergeOptions({
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
 });
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  CircleMarker,
+} from "react-leaflet";
 import { Location } from "@safe-travels/models/location";
 import { FC, useEffect, useState } from "react";
 
@@ -47,13 +53,21 @@ const Map: FC<Props> = ({ locations }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {locations.map((position, index) => {
+          const isNewest = index === locations.length - 1;
+
           return (
-            <Marker
-              position={{ lat: position.latitude, lng: position.longitude }}
+            <CircleMarker
               key={index}
+              center={{ lat: position.latitude, lng: position.longitude }}
+              radius={8}
+              weight={2}
+              opacity={0.8}
+              fillColor={isNewest ? "blue" : "grey"}
+              color={"blue"}
+              fillOpacity={0.8}
             >
               <Popup>{formatDefault(position.timestamp)}</Popup>
-            </Marker>
+            </CircleMarker>
           );
         })}
       </MapContainer>
