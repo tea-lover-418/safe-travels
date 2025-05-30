@@ -19,21 +19,21 @@ Upload photos and text onto a feed.
 
 You should be able to host Safe Travels yourself, for free. However it does require some technical knowledge to set up.
 
-Web hosting: Vercel
+Web hosting: [Vercel](https://vercel.com)
 
 - Large free tier
 - Automatic static generation & optimization
 - Built in analytics
 
-Database: MongoDB
+Database: [MongoDB (Atlas)](https://www.mongodb.com/products/platform/atlas-database)
 
 - Large free tier
 - Document strucutre allows for a lot of customization
 - Relational databases are for nerds 🤓
 
-Object storage: not sure yet
+Object storage: [Cloudflare R2](https://developers.cloudflare.com/r2/pricing/)
 
-- Needs to be free
+- Great free tier
 
 ## Local Development
 
@@ -53,6 +53,6 @@ Make sure you are also running web, as this contains the API.
 - `apps/web`: a [Next.js](https://nextjs.org/) react app and api
 - `apps/android`: an android app
 
-- `packages/ui`: a stub React component library
+- `packages/models`: Shared API models for all apps.
 - `packages/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `packages/typescript-config`: `tsconfig.json`s used throughout the monorepo
