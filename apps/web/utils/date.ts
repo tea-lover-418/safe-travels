@@ -1,5 +1,10 @@
 import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
-export const formatDefault = (date: string, endDate?: string) => {
-  return `${dayjs(date).format("HH:mm - DD MMM YYYY")} ${endDate ? "- " + dayjs(endDate).format("HH:mm - DD MMM YYYY") : ""}`;
+dayjs.extend(relativeTime);
+
+export const formatDefault = (date: string) => {
+  const parsedDate = dayjs(date);
+
+  return `${parsedDate.fromNow()}`;
 };
