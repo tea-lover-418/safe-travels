@@ -1,14 +1,14 @@
 import { FC } from "react";
 import {
   FeedImage as FeedImageType,
-  Feed as FeedType,
+  FeedItem,
 } from "@safe-travels/models/feed";
 
 import styles from "./feed.module.css";
 import { formatDefault } from "../../utils/date";
 
 interface Props {
-  feed: FeedType;
+  feed: FeedItem[];
 }
 
 export const Feed: FC<Props> = ({ feed }) => {

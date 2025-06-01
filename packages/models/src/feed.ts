@@ -1,6 +1,6 @@
 import { LocationWithoutTime } from "./location";
 
-export type Feed = FeedImage[];
+export type FeedItem = FeedImage;
 
 type FeedItemBase = {
   timestamp: string;

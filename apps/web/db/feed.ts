@@ -1,0 +1,17 @@
+import { getDbClient } from ".";
+import { feedCollection } from "./collections";
+import { FeedItem } from "@safe-travels/models/feed";
+
+export const insertFeed = async (feedItem: FeedItem) => {
+  const db = await getDbClient();
+
+  return db.collection(feedCollection).insertOne(feedItem);
+};
+
+export const findFeed = async () => {
+  const db = await getDbClient();
+
+  const feed = await db.collection<FeedItem>(feedCollection).find({}).toArray();
+
+  return feed;
+};
