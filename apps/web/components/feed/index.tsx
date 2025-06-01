@@ -5,6 +5,7 @@ import {
 } from "@safe-travels/models/feed";
 
 import styles from "./feed.module.css";
+import { formatDefault } from "../../utils/date";
 
 interface Props {
   feed: FeedType;
@@ -18,9 +19,21 @@ export const Feed: FC<Props> = ({ feed }) => {
 
 export const FeedImage: FC<FeedImageType> = ({
   imageSrc,
+  timestamp,
   title,
   description,
   location,
 }) => {
-  return <img src={imageSrc} className={styles.feedImage} />;
+  return (
+    <div>
+      <h1>{title}</h1>
+      <h3>{formatDefault(timestamp)}</h3>
+      <p>{description}</p>
+      <div className={styles.feedImageContainer}>
+        {imageSrc.map((src, index) => {
+          return <img src={src} className={styles.feedImage} key={index} />;
+        })}
+      </div>
+    </div>
+  );
 };

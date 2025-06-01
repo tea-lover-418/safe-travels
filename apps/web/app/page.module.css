@@ -13,12 +13,15 @@
 }
 
 .feedContainer {
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   width: 50%;
   height: 100%;
   overflow-y: auto;
   padding: 20px;
   padding-top: 50px;
+  gap: 80px
 }
 
 @media (max-width: 768px) {
