@@ -79,9 +79,9 @@ const Map: FC<Props> = ({ locations }) => {
   return (
     isClient && (
       <MapContainer
-        style={{ height: "800px", width: "100%" }}
+        style={{ height: "100%", width: "100%", borderRadius: 20 }}
         center={mapPosition}
-        zoom={13}
+        zoom={9}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

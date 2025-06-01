@@ -3,3 +3,5 @@ export interface Location {
   longitude: number;
   timestamp: string;
 }
+
+export type LocationWithoutTime = Omit<Location, "timestamp">;

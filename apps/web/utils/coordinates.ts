@@ -1,8 +1,8 @@
-import { Location } from "@safe-travels/models/location";
+import { LocationWithoutTime } from "@safe-travels/models/location";
 
 export const isWithin100Meters = (
-  homeCoordinate: Omit<Location, "timestamp">,
-  newCoordinate: Omit<Location, "timestamp">
+  homeCoordinate: LocationWithoutTime,
+  newCoordinate: LocationWithoutTime
 ): boolean => {
   const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
 

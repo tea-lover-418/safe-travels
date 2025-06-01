@@ -1,4 +1,4 @@
-import { Location } from "@safe-travels/models/location";
+import { LocationWithoutTime } from "@safe-travels/models/location";
 import { serverConfig } from "../config";
 
 const splitCoordinates = serverConfig.home?.split(",");
@@ -11,7 +11,7 @@ const longitude = splitCoordinates?.[1]
   ? parseFloat(splitCoordinates[1] || "")
   : undefined;
 
-export const home: Omit<Location, "timestamp"> | undefined =
+export const home: LocationWithoutTime | undefined =
   latitude && longitude
     ? {
         latitude,

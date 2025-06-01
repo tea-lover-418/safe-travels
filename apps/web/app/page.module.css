@@ -1,3 +1,34 @@
 .page {
+  display: flex;
+  height: 100vh;
+  margin: 0;
+}
 
+.mapContainer {
+  box-sizing: border-box;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.feedContainer {
+  box-sizing: border-box;
+  width: 50%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px;
+  padding-top: 50px;
+}
+
+@media (max-width: 768px) {
+  .page {
+    flex-direction: column;
+  }
+
+  .mapContainer,
+  .feedContainer {
+    width: 100%;
+    height: 50%;
+  }
 }
