@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+
 import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
+import { Spectral, Inter } from "next/font/google";
+
+const serif = Spectral({
+  weight: "500",
+  subsets: ["latin"],
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
+
+const sans = Inter({
+  weight: "300",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -26,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Analytics />
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${serif.className}, ${sans.className}`}>
         {children}
       </body>
     </html>

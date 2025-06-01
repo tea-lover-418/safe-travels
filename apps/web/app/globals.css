@@ -1,6 +1,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  font-family: "Inter";
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,4 +23,11 @@ body {
   html {
     color-scheme: dark;
   }
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Spectral";
+  margin: 0;
 }
