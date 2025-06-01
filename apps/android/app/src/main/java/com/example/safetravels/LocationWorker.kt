@@ -90,6 +90,10 @@ fun sendLocationToServer(lat: Double, lon: Double) {
 
     val request = Request.Builder()
         .url(url)
+        .addHeader(
+            name = "Authorization",
+            value = "your token here"
+        )
         .post(requestBody)
         .build()
 
