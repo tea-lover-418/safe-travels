@@ -2,12 +2,19 @@ import { Location } from "@safe-travels/models/location";
 import { insertLocation } from "../../../db/location";
 import { isWithin100Meters } from "../../../utils/coordinates";
 import { home } from "../../../utils/home";
+import { isAuthorized } from "../../../utils/auth";
 
 /** Test endpoint:
  * happy: curl http://localhost:3000/api/location --request POST --data '{"latitude": 52.402515, "longitude": 4.710760}'
  * unhappy: curl http://localhost:3000/api/location --request POST --data '{"jemoeder": true}'
  */
 export async function POST(request: Request) {
+  if (!isAuthorized(request.headers.get("API_TOKEN"))) {
+    return new Response(undefined, {
+      status: 401,
+    });
+  }
+
   const data = await request.json();
 
   if (!data.latitude || !data.longitude) {

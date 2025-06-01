@@ -4,7 +4,8 @@
   "globalEnv": [
     "MONGODB_CONNECTION_STRING",
     "MONGO_DB_NAME",
-    "HOME_COORDS"
+    "HOME_COORDS",
+    "API_TOKEN"
   ],
   "tasks": {
     "build": {
