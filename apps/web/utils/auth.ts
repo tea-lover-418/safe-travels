@@ -1,8 +1,10 @@
 import { serverConfig } from "../config";
 
 export const isAuthorized = (token?: string | null) => {
-  console.log("server token", serverConfig.apiToken);
-  console.log("client token", token);
+  /** Auth is optional for now */
+  if (!serverConfig.apiToken) {
+    return true;
+  }
 
-  return !serverConfig.apiToken && token === serverConfig.apiToken;
+  return token === serverConfig.apiToken;
 };
