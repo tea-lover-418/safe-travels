@@ -9,7 +9,9 @@ import { isAuthorized } from "../../../utils/auth";
  * unhappy: curl http://localhost:3000/api/location --request POST --data '{"jemoeder": true}'
  */
 export async function POST(request: Request) {
-  if (!isAuthorized(request.headers.get("Authorization"))) {
+  const token = request.headers.get("Authorization");
+
+  if (!isAuthorized(token)) {
     return new Response(undefined, {
       status: 401,
     });
