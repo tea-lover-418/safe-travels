@@ -1,4 +1,4 @@
-package com.example.yourapp.ui
+package com.example.safetravels
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
