@@ -41,7 +41,7 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
 
             try {
                 val location =
-                    LocationServices.getFusedLocationProviderClient(context)
+                    fusedLocationProvider
                         .getCurrentLocation(
                             com.google.android.gms.location.Priority
                                 .PRIORITY_HIGH_ACCURACY,
