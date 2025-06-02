@@ -4,16 +4,44 @@ import { Metadata } from "next";
 import { Feed } from "../components/feed";
 import { findLocations } from "../db/location";
 import { findFeed } from "../db/feed";
+import { FC } from "react";
+import {
+  Location,
+  LocationWithoutTime,
+  TargetLocation,
+} from "@safe-travels/models/location";
+import { home } from "../utils/home";
+import { calculateDistance } from "../utils/coordinates";
 
 export const revalidate = 10;
 
 const getData = async () => {
   const [locations, feed] = await Promise.all([findLocations(), findFeed()]);
+  const targetLocation = {
+    latitude: 66.551846,
+    longitude: 15.321903,
+    name: "the Arctic Circle",
+  };
+
+  const hasReachedGoal =
+    targetLocation &&
+    locations.some((location) => {
+      /** We round the current location to 1 db. This way it can be approximated, rather than exactly matched. */
+
+      const hasLatitude =
+        Math.round(location.longitude * 10) / 10 === targetLocation.longitude;
+      const hasLongitude =
+        Math.round(location.latitude * 10) / 10 === targetLocation.latitude;
+
+      return hasLatitude && hasLongitude;
+    });
 
   // _id is not JSON serializable so we strip it off
   return {
     locations: locations.map(({ _id, ...rest }) => rest),
     feed,
+    targetLocation,
+    hasReachedGoal,
   };
 };
 
@@ -23,14 +51,62 @@ export default async function Home() {
   return (
     <div className={styles.page}>
       <div className={styles.mapContainer}>
-        <Map locations={data.locations} />
+        <Map locations={data.locations} targetLocation={data.targetLocation} />
       </div>
       <div className={styles.feedContainer}>
+        <Distance
+          locations={data.locations}
+          targetLocation={data.targetLocation}
+          hasReachedGoal={data.hasReachedGoal}
+        />
         <Feed feed={data.feed} />
       </div>
     </div>
   );
 }
+
+const Distance: FC<{
+  locations: LocationWithoutTime[];
+  targetLocation: TargetLocation | undefined;
+  hasReachedGoal?: boolean;
+}> = ({ locations, targetLocation, hasReachedGoal }) => {
+  if (!locations.length || !targetLocation) {
+    return;
+  }
+
+  const lastLocation = locations[locations.length - 1] as Location; // ts is dumb sometimes
+
+  const displayDistance = (distance: number) => {
+    return `${Math.round(distance / 100) / 10}km`;
+  };
+
+  if (hasReachedGoal) {
+    if (!home) {
+      return (
+        <div>
+          <h1>Goal reached!</h1>
+          <h2>On their way back</h2>
+        </div>
+      );
+    }
+
+    const distance = calculateDistance(lastLocation, home);
+    return (
+      <div>
+        <h1>Goal reached!</h1>
+        <h2>{displayDistance(distance)}km away from home</h2>
+      </div>
+    );
+  }
+
+  const distance = calculateDistance(lastLocation, targetLocation);
+  return (
+    <div>
+      <h1>On their way to {targetLocation.name}</h1>
+      <h2>{displayDistance(distance)} to go</h2>
+    </div>
+  );
+};
 
 export const generateMetadata = async (): Promise<Metadata> => {
   return {

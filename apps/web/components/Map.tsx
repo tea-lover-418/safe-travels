@@ -5,7 +5,7 @@ import { FC, useMemo } from "react";
 import { Props } from "../components/LeafletMap";
 
 /** This map only exists as a fix so we can fetch dynamic on a client component, but also have a SSR page */
-export const Map: FC<Props> = ({ locations }) => {
+export const Map: FC<Props> = (props) => {
   const LeafletMap = useMemo(
     () =>
       dynamic(() => import("../components/LeafletMap"), {
@@ -15,5 +15,5 @@ export const Map: FC<Props> = ({ locations }) => {
     []
   );
 
-  return <LeafletMap locations={locations} />;
+  return <LeafletMap {...props} />;
 };

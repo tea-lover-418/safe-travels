@@ -4,16 +4,25 @@ export const isWithin100Meters = (
   homeCoordinate: LocationWithoutTime,
   newCoordinate: LocationWithoutTime
 ): boolean => {
+  const distance = calculateDistance(homeCoordinate, newCoordinate);
+
+  return distance <= 100;
+};
+
+export const calculateDistance = (
+  pointA: LocationWithoutTime,
+  pointB: LocationWithoutTime
+) => {
   const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
 
   /** Earth's radius */
   const R = 6371e3;
 
-  const φ1 = toRadians(homeCoordinate.latitude);
-  const φ2 = toRadians(newCoordinate.latitude);
+  const φ1 = toRadians(pointA.latitude);
+  const φ2 = toRadians(pointB.latitude);
 
-  const Δφ = toRadians(newCoordinate.latitude - homeCoordinate.latitude);
-  const Δλ = toRadians(newCoordinate.longitude - homeCoordinate.longitude);
+  const Δφ = toRadians(pointB.latitude - pointA.latitude);
+  const Δλ = toRadians(pointB.longitude - pointA.longitude);
 
   const a =
     Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
@@ -22,5 +31,5 @@ export const isWithin100Meters = (
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   const distance = R * c;
 
-  return distance <= 100;
+  return distance;
 };

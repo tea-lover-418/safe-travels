@@ -5,3 +5,7 @@ export interface Location {
 }
 
 export type LocationWithoutTime = Omit<Location, "timestamp">;
+
+export type TargetLocation = LocationWithoutTime & {
+  name: string;
+};
