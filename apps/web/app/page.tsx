@@ -10,7 +10,7 @@ import {
   LocationWithoutTime,
   TargetLocation,
 } from "@safe-travels/models/location";
-import { home } from "../utils/home";
+
 import { calculateDistance } from "../utils/coordinates";
 
 export const revalidate = 10;
@@ -20,7 +20,7 @@ const getData = async () => {
   const targetLocation = {
     latitude: 66.551846,
     longitude: 15.321903,
-    name: "the Arctic Circle",
+    name: "On the way to the Arctic Circle",
   };
 
   const hasReachedGoal =
@@ -70,7 +70,7 @@ const Distance: FC<{
   targetLocation: TargetLocation | undefined;
   hasReachedGoal?: boolean;
 }> = ({ locations, targetLocation, hasReachedGoal }) => {
-  if (!locations.length || !targetLocation) {
+  if (hasReachedGoal || !locations.length || !targetLocation) {
     return;
   }
 
@@ -80,29 +80,10 @@ const Distance: FC<{
     return `${Math.round(distance / 100) / 10}km`;
   };
 
-  if (hasReachedGoal) {
-    if (!home) {
-      return (
-        <div>
-          <h1>Goal reached!</h1>
-          <h2>On their way back</h2>
-        </div>
-      );
-    }
-
-    const distance = calculateDistance(lastLocation, home);
-    return (
-      <div>
-        <h1>Goal reached!</h1>
-        <h2>{displayDistance(distance)}km away from home</h2>
-      </div>
-    );
-  }
-
   const distance = calculateDistance(lastLocation, targetLocation);
   return (
     <div>
-      <h1>On their way to {targetLocation.name}</h1>
+      <h1>{targetLocation.name}</h1>
       <h2>{displayDistance(distance)} to go</h2>
     </div>
   );
