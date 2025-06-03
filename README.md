@@ -9,11 +9,19 @@ Safe Travels is a privacy oriented travel platform for self hosting.
 
 ### Location tracking
 
-Show your current location and travelled route. Updates every ~15 minutes even when the app is not open or in the background.
+Show your current location and travelled route. Your location is tracked no measurable effect on your battery life, and works while the app is not even running or open in the background.
 
 ### Feed
 
 Upload photos and text onto a feed.
+
+### Privacy
+
+Privacy is a cornerstone of SafeTravels. While many platforms collect and sell your data, SafeTravels let's you control the data and will never sell this in any way.
+
+Includes other safety features like:
+
+- Blocking location tracking near your home
 
 ## Self hosting
 
@@ -28,7 +36,7 @@ Web hosting: [Vercel](https://vercel.com)
 Database: [MongoDB (Atlas)](https://www.mongodb.com/products/platform/atlas-database)
 
 - Large free tier
-- Document strucutre allows for a lot of customization
+- Document structure allows for a lot of customization
 - Relational databases are for nerds 🤓
 
 Object storage: [Cloudflare R2](https://developers.cloudflare.com/r2/pricing/)
@@ -49,10 +57,11 @@ Make sure you are also running web, as this contains the API.
 
 ### Apps and Packages
 
-- `apps/docs`: a future docusaurus app
-- `apps/web`: a [Next.js](https://nextjs.org/) react app and api
-- `apps/android`: an android app
+- `apps/docs`: (under construction) a future docusaurus app.
+- `apps/quick-setup`: (under construction) a cli tool that can set up your database and hosting.
+- `apps/web`: the web app that visualizes your journey.
+- `apps/android`: the android app for personal tracking and updating your feed.
 
 - `packages/models`: Shared API models for all apps.
-- `packages/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `packages/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `packages/eslint-config`: eslint configurations
+- `packages/typescript-config`: tsconfig's used throughout the monorepo.
