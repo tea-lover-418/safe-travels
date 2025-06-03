@@ -12,6 +12,7 @@ import {
 } from "@safe-travels/models/location";
 
 import { calculateDistance } from "../utils/coordinates";
+import { OpenSourceNotice } from "../components/open-source-notice";
 
 export const revalidate = 10;
 
@@ -60,6 +61,7 @@ export default async function Home() {
           hasReachedGoal={data.hasReachedGoal}
         />
         <Feed feed={data.feed} />
+        <OpenSourceNotice />
       </div>
     </div>
   );
