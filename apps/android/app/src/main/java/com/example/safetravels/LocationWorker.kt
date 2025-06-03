@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.core.content.ContextCompat
+import androidx.work.Constraints
 import androidx.work.CoroutineWorker
 import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
@@ -51,23 +53,28 @@ class LocationWorker(appContext: Context, params: WorkerParameters) :
                 sendLocationToServer(it.latitude, it.longitude)
                 Result.success()
             }
-                ?: Result.retry()
+                ?: Result.success()
         } catch (e: Exception) {
             e.printStackTrace()
-            Result.retry()
+            Result.success()
         }
     }
-
 }
 
 fun schedulePeriodicLocationWork(context: Context) {
+    /** Only run when connected */
+    val constraints = Constraints.Builder()
+        .setRequiredNetworkType(NetworkType.CONNECTED)
+        .build()
+
     val periodicWorkRequest =
-        PeriodicWorkRequestBuilder<LocationWorker>(15, TimeUnit.MINUTES).build()
+        PeriodicWorkRequestBuilder<LocationWorker>(15, TimeUnit.MINUTES).setConstraints(constraints)
+            .build()
 
     WorkManager.getInstance(context)
         .enqueueUniquePeriodicWork(
             "LocationPeriodicWork",
-            ExistingPeriodicWorkPolicy.REPLACE,
+            ExistingPeriodicWorkPolicy.KEEP,
             periodicWorkRequest
         )
 }
@@ -78,40 +85,47 @@ fun sendLocationToServer(lat: Double, lon: Double) {
     // temporary, to be set in config
     // 10.0.2.2 points to http:localhost from emulator
     val url = "http://10.0.2.2:3000/api/location"
-    val json = JSONObject().apply {
-        put("latitude", lat)
-        put("longitude", lon)
-    }
 
-    val requestBody = RequestBody.create(
-        "application/json; charset=utf-8".toMediaTypeOrNull(),
-        json.toString()
-    )
-
-    val request = Request.Builder()
-        .url(url)
-        .addHeader(
-            name = "Authorization",
-            value = "your token here"
-        )
-        .post(requestBody)
-        .build()
-
-    client.newCall(request).enqueue(object : Callback {
-        override fun onFailure(call: Call, e: IOException) {
-            e.printStackTrace()
-            println("Failed to send location: ${e.message}")
+    val json =
+        JSONObject().apply {
+            put("latitude", lat)
+            put("longitude", lon)
         }
 
-        override fun onResponse(call: Call, response: Response) {
-            response.use {
-                if (!response.isSuccessful) {
-                    println("Unexpected code: ${response.code}")
-                } else {
-                    println("Location sent successfully: $lat, $lon at ${Date()}")
-                    println("Server response: ${response.body?.string()}")
+    val requestBody =
+        RequestBody.create(
+            "application/json; charset=utf-8".toMediaTypeOrNull(),
+            json.toString()
+        )
+
+    val request =
+        Request.Builder()
+            .url(url)
+            .addHeader(
+                name = "Authorization",
+                value = "your token here"
+            )
+            .post(requestBody)
+            .build()
+
+    client.newCall(request)
+        .enqueue(
+            object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    e.printStackTrace()
+                    println("Failed to send location: ${e.message}")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    response.use {
+                        if (!response.isSuccessful) {
+                            println("Unexpected code: ${response.code}")
+                        } else {
+                            println("Location sent successfully: $lat, $lon at ${Date()}")
+                            println("Server response: ${response.body?.string()}")
+                        }
+                    }
                 }
             }
-        }
-    })
+        )
 }
