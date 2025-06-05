@@ -5,6 +5,8 @@
 
 Safe Travels is a privacy oriented travel platform for self hosting.
 
+![Quick overview of SafeTravels](https://raw.githubusercontent.com/tea-lover-418/safe-travels/refs/heads/main/public/github_hero.png)
+
 ## Features
 
 ### Location tracking
