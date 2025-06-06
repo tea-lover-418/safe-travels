@@ -1,6 +1,6 @@
 "use client";
 
-import L from "leaflet";
+import L, { map } from "leaflet";
 
 /** Icon fix */
 L.Icon.Default.mergeOptions({
@@ -19,8 +19,12 @@ import {
   CircleMarker,
   useMap,
 } from "react-leaflet";
-import { Location, TargetLocation } from "@safe-travels/models/location";
-import { FC, useEffect, useRef, useState } from "react";
+import {
+  Location,
+  LocationWithoutTime,
+  TargetLocation,
+} from "@safe-travels/models/location";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 
 import "leaflet/dist/leaflet.css";
 import { isToday, formatDefault } from "../utils/date";
@@ -77,11 +81,6 @@ const colorSchemes = {
 } as const;
 
 type ColorScheme = (typeof colorSchemes)[keyof typeof colorSchemes];
-
-export interface Props {
-  locations: Location[];
-  targetLocation?: TargetLocation;
-}
 
 const TargetLocationMarker: FC<{ position: TargetLocation }> = ({
   position,
@@ -146,17 +145,35 @@ const Marker: FC<{
   );
 };
 
-const Map: FC<Props> = ({ locations, targetLocation }) => {
+/** Hack component because to mutate the map you need to be a component inside of it. */
+const MapPosition: FC<{ mapPosition: [number, number] }> = ({
+  mapPosition,
+}) => {
+  const map = useMap();
+
+  useEffect(() => {
+    map.flyTo(mapPosition);
+  }, [map, mapPosition]);
+
+  return undefined;
+};
+
+export interface Props {
+  locations: Location[];
+  targetLocation?: TargetLocation;
+  mapFocus: LocationWithoutTime | undefined;
+}
+
+const Map: FC<Props> = ({ locations, targetLocation, mapFocus }) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  const mapPosition = [
-    locations[locations.length - 1]?.latitude,
-    locations[locations.length - 1]?.longitude,
-  ] as [number, number];
+  const mapPosition: [number, number] = useMemo(() => {
+    return [mapFocus?.latitude || 0, mapFocus?.longitude || 0];
+  }, [mapFocus]);
 
   return (
     isClient && (
@@ -165,6 +182,7 @@ const Map: FC<Props> = ({ locations, targetLocation }) => {
         center={mapPosition}
         zoom={9}
       >
+        <MapPosition mapPosition={mapPosition} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -11,3 +11,11 @@
   border-radius: 20px;
 }
 
+.headerContainer {
+  cursor: pointer;
+}
+
+.headerContainer:hover {
+  color: #7478E7;
+  text-decoration: underline;
+}
