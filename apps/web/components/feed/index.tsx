@@ -24,13 +24,17 @@ export const FeedImage: FC<FeedImageType> = ({
   description,
   location,
 }) => {
+  if (!imageSrc?.length && !title) {
+    return;
+  }
+
   return (
     <div>
       <h1>{title}</h1>
       <h3>{formatDefault(timestamp)}</h3>
       <p>{description}</p>
       <div className={styles.feedImageContainer}>
-        {imageSrc.map((src, index) => {
+        {imageSrc?.map((src, index) => {
           return <img src={src} className={styles.feedImage} key={index} />;
         })}
       </div>

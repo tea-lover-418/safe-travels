@@ -11,7 +11,11 @@ export const insertFeed = async (feedItem: FeedItem) => {
 export const findFeed = async () => {
   const db = await getDbClient();
 
-  const feed = await db.collection<FeedItem>(feedCollection).find({}).toArray();
+  const feed = await db
+    .collection<FeedItem>(feedCollection)
+    .find()
+    .sort({ _id: -1 })
+    .toArray();
 
   return feed;
 };
