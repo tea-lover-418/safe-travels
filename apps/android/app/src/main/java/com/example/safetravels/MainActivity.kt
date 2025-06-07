@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun AppWithTabs() {
         var selectedTab by remember { mutableStateOf(0) }
-        val tabs = listOf("Main", "Config")
+        val tabs = listOf("Location", "Feed", "Config")
 
         Scaffold(
             topBar = {
@@ -84,7 +84,8 @@ class MainActivity : ComponentActivity() {
             Box(modifier = Modifier.padding(padding)) {
                 when (selectedTab) {
                     0 -> MainFeed()
-                    1 -> ConfigForm()
+                    1 -> FeedScreen()
+                    2 -> ConfigForm()
                 }
             }
         }
