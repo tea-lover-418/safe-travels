@@ -18,6 +18,7 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
     private val fusedLocationProvider = LocationServices.getFusedLocationProviderClient(application)
 
     private val _location = MutableStateFlow(Pair("Unknown", "Unknown"))
+
     val location: StateFlow<Pair<String, String>> = _location
 
     init {

@@ -1,7 +1,6 @@
 package com.example.safetravels
 
 import android.Manifest
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -24,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 
+
 class MainActivity : ComponentActivity() {
 
     private val locationPermissions =
@@ -36,9 +36,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-
-        val apiLevel = Build.VERSION.SDK_INT
-        Log.d("DEVICE_API", "Device is running API level: $apiLevel")
 
         val permissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
@@ -58,8 +55,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Log.d("INFO", "we creating")
 
         setContent { MaterialTheme { AppWithTabs() } }
     }

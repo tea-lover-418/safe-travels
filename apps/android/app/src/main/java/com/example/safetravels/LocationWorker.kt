@@ -1,9 +1,11 @@
 package com.example.safetravels
 
+import DataStoreManager
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.work.Constraints
 import androidx.work.CoroutineWorker
@@ -14,6 +16,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.tasks.await
 import okhttp3.Call
 import okhttp3.Callback
@@ -27,8 +30,15 @@ import java.io.IOException
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
+data class Config(
+    val apiUrl: String = "",
+    val apiKey: String? = ""
+)
+
 class LocationWorker(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {
+
+    var config = Config()
 
     override suspend fun doWork(): Result {
         val hasPermission =
@@ -41,6 +51,13 @@ class LocationWorker(appContext: Context, params: WorkerParameters) :
             return Result.failure()
         }
 
+        Log.d("LOCATION_WORKER", "trying to send location")
+
+        val savedUrl = DataStoreManager.getApiUrl(applicationContext).first()
+        val savedApiKey = DataStoreManager.getApiKey(applicationContext).first()
+        config = config.copy(apiUrl = savedUrl ?: "")
+        config = config.copy(apiKey = savedApiKey)
+
         return try {
             val fusedLocationProvider =
                 LocationServices.getFusedLocationProviderClient(applicationContext)
@@ -50,7 +67,7 @@ class LocationWorker(appContext: Context, params: WorkerParameters) :
                     .await()
 
             location?.let {
-                sendLocationToServer(it.latitude, it.longitude)
+                sendLocationToServer(config, it.latitude, it.longitude)
                 Result.success()
             }
                 ?: Result.success()
@@ -81,10 +98,13 @@ fun schedulePeriodicLocationWork(context: Context) {
 
 private val client = OkHttpClient()
 
-fun sendLocationToServer(lat: Double, lon: Double) {
+
+fun sendLocationToServer(config: Config, lat: Double, lon: Double) {
     // temporary, to be set in config
     // 10.0.2.2 points to http:localhost from emulator
-    val url = "http://10.0.2.2:3000/api/location"
+    // val url = "http://10.0.2.2:3000/api/location"
+    val url = config.apiUrl
+    val path = "${url}/api/location"
 
     val json =
         JSONObject().apply {
@@ -100,10 +120,10 @@ fun sendLocationToServer(lat: Double, lon: Double) {
 
     val request =
         Request.Builder()
-            .url(url)
+            .url(path)
             .addHeader(
                 name = "Authorization",
-                value = "your token here"
+                value = config.apiKey ?: ""
             )
             .post(requestBody)
             .build()
