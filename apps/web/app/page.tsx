@@ -1,4 +1,3 @@
-import styles from "./page.module.css";
 import { Metadata } from "next";
 import { findLocations } from "../db/location";
 import { findFeed } from "../db/feed";
@@ -43,14 +42,12 @@ export default async function Home() {
   const data = await getData();
 
   return (
-    <div className={styles.page}>
-      <Main
-        locations={data.locations}
-        feed={data.feed}
-        targetLocation={data.targetLocation}
-        hasReachedGoal={data.hasReachedGoal}
-      />
-    </div>
+    <Main
+      locations={data.locations}
+      feed={data.feed}
+      targetLocation={data.targetLocation}
+      hasReachedGoal={data.hasReachedGoal}
+    />
   );
 }
 

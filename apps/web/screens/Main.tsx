@@ -36,7 +36,7 @@ export const Main: FC<Props> = ({
   }, [mapFocus]);
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.mapContainer}>
         <Map
           locations={locations}
@@ -54,6 +54,6 @@ export const Main: FC<Props> = ({
         <Feed feed={feed} setMapFocus={setMapFocus} />
         <OpenSourceNotice />
       </div>
-    </>
+    </div>
   );
 };
