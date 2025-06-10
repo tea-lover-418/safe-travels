@@ -1,14 +1,19 @@
-.feedImageContainer {
+.imageGridContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px
+  gap: 18px;
+}
+
+.imageContainer {
+  position: relative;
+  width: 80%;
+  margin: auto;
 }
 
 .feedImage {
-  width: 100%;
+  border-radius: 20px;
   object-fit: cover;
   object-position: center;
-  border-radius: 20px;
 }
 
 .headerContainer {

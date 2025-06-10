@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Image from "next/image";
 import {
   FeedImage as FeedImageType,
   FeedItem,
@@ -21,8 +22,8 @@ export const Feed: FC<Props> = ({ feed, setMapFocus }) => {
 
 export const FeedImage: FC<
   FeedImageType & { setMapFocus: (location: LocationWithoutTime) => void }
-> = ({ imageSrc, timestamp, title, description, location, setMapFocus }) => {
-  if (!imageSrc?.length && !title) {
+> = ({ images, timestamp, title, description, location, setMapFocus }) => {
+  if (!images?.length && !title) {
     return;
   }
 
@@ -37,9 +38,22 @@ export const FeedImage: FC<
 
       <h3>{formatDefault(timestamp)}</h3>
       <p>{description}</p>
-      <div className={styles.feedImageContainer}>
-        {imageSrc?.map((src, index) => {
-          return <img src={src} className={styles.feedImage} key={index} />;
+      <div className={styles.imageGridContainer}>
+        {images?.map((src, index) => {
+          return (
+            <div key={index} className={styles.imageContainer}>
+              <Image
+                src={src}
+                className={styles.feedImage}
+                alt=""
+                loading="lazy"
+                unoptimized
+                width={0}
+                height={0}
+                style={{ width: "100%", height: "100%" }}
+              />
+            </div>
+          );
         })}
       </div>
     </div>

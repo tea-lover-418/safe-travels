@@ -5,8 +5,7 @@ import { home } from "../../../utils/home";
 import { isAuthorized } from "../../../utils/auth";
 
 /** Test endpoint:
- * happy: curl http://localhost:3000/api/location --request POST --data '{"latitude": 52.402515, "longitude": 4.710760}'
- * unhappy: curl http://localhost:3000/api/location --request POST --data '{"jemoeder": true}'
+ * happy: curl http://localhost:3000/api/location --header "Authorization: shh" --request POST --data '{"latitude": 52.402515, "longitude": 4.710760}'
  */
 export async function POST(request: Request) {
   const token = request.headers.get("Authorization");

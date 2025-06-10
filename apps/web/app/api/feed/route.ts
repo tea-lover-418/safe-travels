@@ -1,6 +1,7 @@
+import { serverConfig } from "../../../config";
+import { insertFeed } from "../../../db/feed";
 import { isAuthorized } from "../../../utils/auth";
 import { FeedItem } from "@safe-travels/models/feed";
-import { insertFeed } from "../../../db/feed";
 
 export async function POST(request: Request) {
   const token = request.headers.get("Authorization");
@@ -22,6 +23,9 @@ export async function POST(request: Request) {
 
   const feedItem = {
     ...data,
+    images: data.images.map(
+      (filename: string) => `${serverConfig.r2?.publicUrl}/${filename}`
+    ),
     timestamp: new Date().toISOString() /** UTC */,
   };
 
