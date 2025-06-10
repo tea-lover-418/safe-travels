@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 
 class MainActivity : ComponentActivity() {
 
-    private val locationPermissions =
+    private val permissions =
         arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                 schedulePeriodicLocationWork(this)
             }
 
-        permissionLauncher.launch(locationPermissions)
+        permissionLauncher.launch(permissions)
         permissionLauncher.launch(
             backgroundPermissions
         ) // TODO: doesn't get triggered now until re-render

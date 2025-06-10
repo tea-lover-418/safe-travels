@@ -1,5 +1,6 @@
 package com.example.safetravels
 
+import Config
 import DataStoreManager
 import android.Manifest
 import android.content.Context
@@ -29,11 +30,6 @@ import org.json.JSONObject
 import java.io.IOException
 import java.util.Date
 import java.util.concurrent.TimeUnit
-
-data class Config(
-    val apiUrl: String = "",
-    val apiKey: String? = ""
-)
 
 class LocationWorker(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {

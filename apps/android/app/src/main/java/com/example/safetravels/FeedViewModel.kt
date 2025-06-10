@@ -1,5 +1,6 @@
 package com.example.safetravels
 
+import Config
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -7,13 +8,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
 
-class FeedViewModel : ViewModel() {
+class FeedViewModel() : ViewModel() {
 
     private val _title = MutableStateFlow("")
     val title = _title.asStateFlow()
@@ -32,11 +34,18 @@ class FeedViewModel : ViewModel() {
     fun onSubmit() {
         Log.d("FEED", "trying to submit new feed")
 
-        println("Submitted: Title = ${_title.value}, Description = ${_description.value}")
+        sendFeedToServer(_title.value, _description.value, "")
     }
 }
 
-fun sendFeedToServer(config: Config, title: String?, description: String?, imageUrls: String?) {
+private val client = OkHttpClient()
+
+fun sendFeedToServer(title: String?, description: String?, imageUrls: String?) {
+    val config = Config(
+        "your-url",
+        "your-api"
+    )
+
     val url = config.apiUrl
     val path = "${url}/api/feed"
 
@@ -44,6 +53,7 @@ fun sendFeedToServer(config: Config, title: String?, description: String?, image
         JSONObject().apply {
             put("title", title)
             put("description", description)
+            put("type", "FeedImage")
         }
 
     val requestBody =
