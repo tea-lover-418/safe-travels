@@ -1,9 +1,8 @@
 .headerContainer {
   cursor: pointer;
-
+  text-decoration: underline;
 }
 
 .headerContainer:hover {
   color: #7478E7;
-  text-decoration: underline;
 }

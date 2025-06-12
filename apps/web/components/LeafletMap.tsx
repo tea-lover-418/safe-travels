@@ -82,10 +82,10 @@ const colorSchemes = {
 
 type ColorScheme = (typeof colorSchemes)[keyof typeof colorSchemes];
 
-const TargetLocationMarker: FC<{ position: TargetLocation }> = ({
-  position,
-}) => {
-  const colorScheme = colorSchemes.green;
+const TargetLocationMarker: FC<{
+  position: TargetLocation;
+  colorScheme?: ColorScheme;
+}> = ({ position, colorScheme = colorSchemes.green }) => {
   return (
     <CircleMarker
       center={{ lat: position.latitude, lng: position.longitude }}
@@ -161,10 +161,16 @@ const MapPosition: FC<{ mapPosition: [number, number] }> = ({
 export interface Props {
   locations: Location[];
   targetLocation?: TargetLocation;
+  feedLocations?: TargetLocation[];
   mapFocus: LocationWithoutTime | undefined;
 }
 
-const Map: FC<Props> = ({ locations, targetLocation, mapFocus }) => {
+const Map: FC<Props> = ({
+  locations,
+  feedLocations,
+  targetLocation,
+  mapFocus,
+}) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -188,6 +194,16 @@ const Map: FC<Props> = ({ locations, targetLocation, mapFocus }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {targetLocation && <TargetLocationMarker position={targetLocation} />}
+        {feedLocations &&
+          feedLocations.map((position, index) => {
+            return (
+              <TargetLocationMarker
+                position={position}
+                key={index}
+                colorScheme={colorSchemes.teal}
+              />
+            );
+          })}
         {locations.map((position, index) => (
           <Marker
             key={index}

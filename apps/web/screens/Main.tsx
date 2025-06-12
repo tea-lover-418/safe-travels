@@ -40,6 +40,14 @@ export const Main: FC<Props> = ({
       <div className={styles.mapContainer}>
         <Map
           locations={locations}
+          feedLocations={feed
+            .map(({ location, title }) => {
+              if (!location?.latitude || !location.longitude) {
+                return;
+              }
+              return { ...location, name: title };
+            })
+            .filter((val) => !!val)}
           targetLocation={targetLocation}
           mapFocus={mapFocus}
         />

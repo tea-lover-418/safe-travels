@@ -27,11 +27,13 @@ export const FeedImage: FC<
     return;
   }
 
+  const hasLocation = location?.latitude && location?.longitude;
+
   return (
     <div>
       <div
-        className={location ? styles.headerContainer : undefined}
-        onClick={location ? () => setMapFocus(location) : undefined}
+        className={hasLocation ? styles.headerContainer : undefined}
+        onClick={hasLocation ? () => setMapFocus(location) : undefined}
       >
         <h1>{title}</h1>
       </div>
