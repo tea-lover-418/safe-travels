@@ -36,6 +36,7 @@ import coil.compose.rememberAsyncImagePainter
 fun FeedScreen(viewModel: FeedViewModel = viewModel()) {
     val title by viewModel.title.collectAsState()
     val description by viewModel.description.collectAsState()
+    val overrideLocation by viewModel.overrideLocation.collectAsState()
     val imageUris by viewModel.imageUris.collectAsState()
 
     val context = LocalContext.current
@@ -68,6 +69,13 @@ fun FeedScreen(viewModel: FeedViewModel = viewModel()) {
                 .fillMaxWidth()
                 .height(120.dp),
             maxLines = 4
+        )
+
+        OutlinedTextField(
+            value = overrideLocation,
+            onValueChange = viewModel::onOverrideLocationChange,
+            label = { Text("Override Location (format latitude;longitude)") },
+            modifier = Modifier.fillMaxWidth()
         )
 
         LazyRow(

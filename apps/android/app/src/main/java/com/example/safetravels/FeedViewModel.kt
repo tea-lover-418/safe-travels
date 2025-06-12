@@ -1,15 +1,23 @@
 package com.example.safetravels
 
 import Config
+import android.Manifest
+import android.app.Application
 import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
 import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.ViewModel
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
@@ -26,20 +34,22 @@ import java.io.File
 import java.io.IOException
 import java.util.UUID
 
+val config =
+    Config(
+        "http://10.0.2.2:3000",
+        "shh"
+    )
 
-val config = Config(
-    "https://example",
-    "shhhhhh"
-)
-
-
-class FeedViewModel() : ViewModel() {
+class FeedViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _title = MutableStateFlow("")
     val title = _title.asStateFlow()
 
     private val _description = MutableStateFlow("")
     val description = _description.asStateFlow()
+
+    private val _overrideLocation = MutableStateFlow("")
+    val overrideLocation = _overrideLocation.asStateFlow()
 
     private val _imageUris = MutableStateFlow<List<Uri>>(emptyList())
     val imageUris = _imageUris.asStateFlow()
@@ -48,6 +58,10 @@ class FeedViewModel() : ViewModel() {
 
     fun onTitleChange(newTitle: String) {
         _title.value = newTitle
+    }
+
+    fun onOverrideLocationChange(newValue: String) {
+        _overrideLocation.value = newValue
     }
 
     fun onDescriptionChange(newDescription: String) {
@@ -70,13 +84,30 @@ class FeedViewModel() : ViewModel() {
                 pickedImages.add(name to tempFile)
             }
         }
+    }
 
+    private val fusedLocationClient: FusedLocationProviderClient =
+        LocationServices.getFusedLocationProviderClient(application)
+
+    suspend fun getCurrentLocation(): Location? {
+        val context = getApplication<Application>()
+        val hasPermission =
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+
+        if (!hasPermission) return null
+
+        return try {
+            fusedLocationClient.lastLocation.await()
+        } catch (e: Exception) {
+            null
+        }
     }
 
     fun removeImage(uri: Uri) {
-        _imageUris.value = _imageUris.value.toMutableList().also {
-            it.remove(uri)
-        }
+        _imageUris.value = _imageUris.value.toMutableList().also { it.remove(uri) }
     }
 
     fun onSubmit() {
@@ -85,16 +116,50 @@ class FeedViewModel() : ViewModel() {
         viewModelScope.launch {
             val imageFiles = uploadPickedImages(pickedImages)
 
-            sendFeedToServer(_title.value, _description.value, imageFiles)
+            val location =
+                when {
+                    overrideLocation.value == "0" -> null
+                    else -> formatOverrideLocation(overrideLocation.value)
+                        ?: getCurrentLocation()
+                }
+
+            sendFeedToServer(title.value, description.value, imageFiles, location)
         }
     }
 }
 
+fun formatOverrideLocation(overrideLocation: String): Location? {
+    val parts = overrideLocation.split(";")
+    if (parts.size == 2) {
+        val lat = parts[0].toDoubleOrNull()
+        val lon = parts[1].toDoubleOrNull()
+
+        if (lat != null && lon != null) {
+            return Location("override").apply {
+                latitude = lat
+                longitude = lon
+            }
+        }
+    }
+    return null
+}
+
 private val client = OkHttpClient()
 
-fun sendFeedToServer(title: String?, description: String?, imageFiles: List<String>) {
+fun sendFeedToServer(
+    title: String?,
+    description: String?,
+    imageFiles: List<String>,
+    location: Location?
+) {
     val url = config.apiUrl
     val path = "${url}/api/feed"
+
+    val locationJson =
+        JSONObject().apply {
+            put("longitude", location?.longitude)
+            put("latitude", location?.latitude)
+        }
 
     val json =
         JSONObject().apply {
@@ -102,6 +167,7 @@ fun sendFeedToServer(title: String?, description: String?, imageFiles: List<Stri
             put("description", description)
             put("type", "FeedImage")
             put("images", JSONArray(imageFiles))
+            put("location", locationJson)
         }
 
     val requestBody =
@@ -113,10 +179,7 @@ fun sendFeedToServer(title: String?, description: String?, imageFiles: List<Stri
     val request =
         Request.Builder()
             .url(path)
-            .addHeader(
-                name = "Authorization",
-                value = config.apiKey ?: ""
-            )
+            .addHeader(name = "Authorization", value = config.apiKey ?: "")
             .post(requestBody)
             .build()
 
@@ -153,39 +216,32 @@ suspend fun uploadPickedImages(pickedImages: List<Pair<String, File>>): List<Str
     return uploadedImageFiles
 }
 
-suspend fun getPresignedUrlFromBackend(filename: String): String? = withContext(Dispatchers.IO) {
-    val url = config.apiUrl
-    val path = "${url}/api/get-bucket-url"
+suspend fun getPresignedUrlFromBackend(filename: String): String? =
+    withContext(Dispatchers.IO) {
+        val url = config.apiUrl
+        val path = "${url}/api/get-bucket-url"
 
-    val jsonMediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
-    val jsonBody = """{"filename":"$filename"}"""
-    val requestBody = jsonBody.toRequestBody(jsonMediaType)
+        val jsonMediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+        val jsonBody = """{"filename":"$filename"}"""
+        val requestBody = jsonBody.toRequestBody(jsonMediaType)
 
-    val request = Request.Builder()
-        .url(path)
-        .post(requestBody)
-        .addHeader(
-            name = "Authorization",
-            value = config.apiKey ?: ""
-        )
-        .build()
+        val request =
+            Request.Builder()
+                .url(path)
+                .post(requestBody)
+                .addHeader(name = "Authorization", value = config.apiKey ?: "")
+                .build()
 
-    client.newCall(request).execute().use { response ->
-        if (response.isSuccessful) response.body?.string() else null
+        client.newCall(request).execute().use { response ->
+            if (response.isSuccessful) response.body?.string() else null
+        }
     }
-}
 
 suspend fun uploadFileToR2(file: File, presignedUrl: String): Boolean =
     withContext(Dispatchers.IO) {
         val mediaType = "image/jpeg".toMediaTypeOrNull() ?: return@withContext false
         val requestBody = file.asRequestBody(mediaType)
-        val request = Request.Builder()
-            .url(presignedUrl)
-            .put(requestBody)
-            .build()
+        val request = Request.Builder().url(presignedUrl).put(requestBody).build()
 
-        client.newCall(request).execute().use { response ->
-            response.isSuccessful
-        }
+        client.newCall(request).execute().use { response -> response.isSuccessful }
     }
-
