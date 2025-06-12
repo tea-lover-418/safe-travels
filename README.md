@@ -1,5 +1,6 @@
 > [!IMPORTANT]
-> Safe Travels is still under construction.
+> Safe Travels is undergoing it's first beta test.
+> Follow it on [travels.stijndeligt.com](https://travels.stijndeligt.com)
 
 # Safe Travels
 
