@@ -31,3 +31,7 @@ h3 {
   font-family: "Spectral";
   margin: 0;
 }
+
+p {
+  white-space: pre-wrap;
+}
