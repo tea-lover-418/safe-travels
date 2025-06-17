@@ -16,14 +16,6 @@ const getData = async () => {
 
   const hasReachedGoal = true;
 
-      const hasLatitude =
-        Math.round(location.longitude * 10) / 10 === targetLocation.longitude;
-      const hasLongitude =
-        Math.round(location.latitude * 10) / 10 === targetLocation.latitude;
-
-      return hasLatitude && hasLongitude;
-    });
-
   // _id is not JSON serializable so we strip it off
   return {
     locations: locations.map(({ _id, ...rest }) => rest),
