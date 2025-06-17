@@ -193,6 +193,14 @@ const Map: FC<Props> = ({
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {locations.map((position, index) => (
+          <Marker
+            key={index}
+            isNewest={index === locations.length - 1}
+            isToday={isToday(position.timestamp)}
+            position={position}
+          />
+        ))}
         {targetLocation && <TargetLocationMarker position={targetLocation} />}
         {feedLocations &&
           feedLocations.map((position, index) => {
@@ -204,14 +212,6 @@ const Map: FC<Props> = ({
               />
             );
           })}
-        {locations.map((position, index) => (
-          <Marker
-            key={index}
-            isNewest={index === locations.length - 1}
-            isToday={isToday(position.timestamp)}
-            position={position}
-          />
-        ))}
       </MapContainer>
     )
   );
