@@ -14,10 +14,7 @@ const getData = async () => {
     name: "On the way to the Arctic Circle",
   };
 
-  const hasReachedGoal =
-    targetLocation &&
-    locations.some((location) => {
-      /** We round the current location to 1 db. This way it can be approximated, rather than exactly matched. */
+  const hasReachedGoal = true;
 
       const hasLatitude =
         Math.round(location.longitude * 10) / 10 === targetLocation.longitude;
