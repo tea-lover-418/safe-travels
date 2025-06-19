@@ -89,7 +89,7 @@ const TargetLocationMarker: FC<{
   return (
     <CircleMarker
       center={{ lat: position.latitude, lng: position.longitude }}
-      radius={12}
+      radius={10}
       weight={2}
       opacity={0.8}
       fillColor={colorScheme.mid}
