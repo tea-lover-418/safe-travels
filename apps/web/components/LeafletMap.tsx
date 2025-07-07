@@ -85,7 +85,24 @@ type ColorScheme = (typeof colorSchemes)[keyof typeof colorSchemes];
 const FeedLocationMarker: FC<{
   position: FeedLocation;
   colorScheme?: ColorScheme;
-}> = ({ position, colorScheme = colorSchemes.green }) => {
+  isFocussed?: boolean;
+}> = ({ position, colorScheme = colorSchemes.green, isFocussed }) => {
+  const feedLocationRef = useRef<L.Popup | null>(null);
+  const map = useMap();
+
+  useEffect(() => {
+    /** Await the FlyTo animation */
+    map.once("moveend", () => {
+      if (!isFocussed) {
+        return;
+      }
+
+      if (feedLocationRef.current) {
+        map.openPopup(feedLocationRef.current);
+      }
+    });
+  }, [isFocussed, map]);
+
   return (
     <CircleMarker
       center={{ lat: position.latitude, lng: position.longitude }}
@@ -96,7 +113,7 @@ const FeedLocationMarker: FC<{
       color={colorScheme.dark}
       fillOpacity={0.9}
     >
-      <Popup>{position.name}</Popup>
+      <Popup ref={feedLocationRef}>{position.name}</Popup>
     </CircleMarker>
   );
 };
@@ -108,15 +125,15 @@ const Marker: FC<{
   colorScheme?: ColorScheme;
 }> = ({ isNewest, isToday, position, colorScheme = colorSchemes.blue }) => {
   const map = useMap();
-  const currentPositionPopupRef = useRef<L.Popup | null>(null);
+  const positionPopupRef = useRef<L.Popup | null>(null);
 
   useEffect(() => {
     if (!isNewest) {
       return;
     }
 
-    if (currentPositionPopupRef.current) {
-      currentPositionPopupRef.current.toggle();
+    if (positionPopupRef.current) {
+      positionPopupRef.current.toggle();
     }
   }, [isNewest, map]);
 
@@ -138,15 +155,13 @@ const Marker: FC<{
       opacity={opacity}
       fillOpacity={opacity}
     >
-      <Popup ref={currentPositionPopupRef}>
-        {formatDefault(position.timestamp)}
-      </Popup>
+      <Popup ref={positionPopupRef}>{formatDefault(position.timestamp)}</Popup>
     </CircleMarker>
   );
 };
 
 /** Hack component because to mutate the map you need to be a component inside of it. */
-const MapPosition: FC<{ mapPosition: [number, number] }> = ({
+const MapPosition: FC<{ mapPosition: [number, number]; key?: string }> = ({
   mapPosition,
 }) => {
   const map = useMap();
@@ -161,7 +176,9 @@ const MapPosition: FC<{ mapPosition: [number, number] }> = ({
 export interface Props {
   locations: Location[];
   feedLocations?: FeedLocation[];
-  mapFocus: LocationWithoutTime | undefined;
+  mapFocus:
+    | { key: string | undefined; position: LocationWithoutTime }
+    | undefined;
 }
 
 const Map: FC<Props> = ({ locations, feedLocations, mapFocus }) => {
@@ -172,7 +189,11 @@ const Map: FC<Props> = ({ locations, feedLocations, mapFocus }) => {
   }, []);
 
   const mapPosition: [number, number] = useMemo(() => {
-    return [mapFocus?.latitude || 0, mapFocus?.longitude || 0];
+    if (mapFocus?.position.latitude && mapFocus?.position.longitude) {
+      return [mapFocus.position.latitude, mapFocus.position.longitude];
+    }
+
+    return [0, 0];
   }, [mapFocus]);
 
   return (
@@ -182,7 +203,7 @@ const Map: FC<Props> = ({ locations, feedLocations, mapFocus }) => {
         center={mapPosition}
         zoom={9}
       >
-        <MapPosition mapPosition={mapPosition} />
+        <MapPosition mapPosition={mapPosition} key={mapFocus?.key} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -202,6 +223,7 @@ const Map: FC<Props> = ({ locations, feedLocations, mapFocus }) => {
                 position={position}
                 key={index}
                 colorScheme={colorSchemes.teal}
+                isFocussed={mapFocus?.key === position.name}
               />
             );
           })}

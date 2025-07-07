@@ -15,13 +15,16 @@ type Props = {
 };
 
 export const Main: FC<Props> = ({ locations, feed }) => {
-  const [mapFocus, setMapFocus] = useState<LocationWithoutTime | undefined>(
-    locations[locations.length - 1]
-  );
-
-  useEffect(() => {
-    console.log(mapFocus);
-  }, [mapFocus]);
+  const [mapFocus, setMapFocus] = useState<
+    | {
+        key: string;
+        position: LocationWithoutTime;
+      }
+    | undefined
+  >({
+    key: "",
+    position: locations[locations.length - 1] || { latitude: 0, longitude: 0 },
+  });
 
   return (
     <div className={styles.container}>

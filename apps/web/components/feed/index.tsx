@@ -11,7 +11,7 @@ import { LocationWithoutTime } from "@safe-travels/models/location";
 
 interface Props {
   feed: FeedItem[];
-  setMapFocus: (location: LocationWithoutTime) => void;
+  setMapFocus: (value: { key: string; position: LocationWithoutTime }) => void;
 }
 
 export const Feed: FC<Props> = ({ feed, setMapFocus }) => {
@@ -21,7 +21,12 @@ export const Feed: FC<Props> = ({ feed, setMapFocus }) => {
 };
 
 export const FeedImage: FC<
-  FeedImageType & { setMapFocus: (location: LocationWithoutTime) => void }
+  FeedImageType & {
+    setMapFocus: (mapFocus: {
+      key: string;
+      position: LocationWithoutTime;
+    }) => void;
+  }
 > = ({ images, timestamp, title, description, location, setMapFocus }) => {
   if (!images?.length && !title) {
     return;
@@ -33,7 +38,11 @@ export const FeedImage: FC<
     <div>
       <div
         className={hasLocation ? styles.headerContainer : undefined}
-        onClick={hasLocation ? () => setMapFocus(location) : undefined}
+        onClick={
+          hasLocation
+            ? () => setMapFocus({ key: title, position: location })
+            : undefined
+        }
       >
         <h1>{title}</h1>
       </div>
