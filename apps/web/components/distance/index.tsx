@@ -1,15 +1,16 @@
 import {
   LocationWithoutTime,
-  TargetLocation,
   Location,
+  FeedLocation,
 } from "@safe-travels/models/location";
 import { FC } from "react";
 import { calculateDistance } from "../../utils/coordinates";
 import styles from "./distance.module.css";
 
+/** Currently not in used, will be part of a Feed re-do */
 export const Distance: FC<{
   locations: LocationWithoutTime[];
-  targetLocation: TargetLocation | undefined;
+  targetLocation: FeedLocation | undefined;
   hasReachedGoal?: boolean;
   setMapFocus: (location: LocationWithoutTime) => void;
 }> = ({ locations, targetLocation, hasReachedGoal, setMapFocus }) => {

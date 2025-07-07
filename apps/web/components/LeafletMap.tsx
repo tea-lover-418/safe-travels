@@ -1,6 +1,6 @@
 "use client";
 
-import L, { map } from "leaflet";
+import L from "leaflet";
 
 /** Icon fix */
 L.Icon.Default.mergeOptions({
@@ -20,9 +20,9 @@ import {
   useMap,
 } from "react-leaflet";
 import {
+  FeedLocation,
   Location,
   LocationWithoutTime,
-  TargetLocation,
 } from "@safe-travels/models/location";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 
@@ -82,8 +82,8 @@ const colorSchemes = {
 
 type ColorScheme = (typeof colorSchemes)[keyof typeof colorSchemes];
 
-const TargetLocationMarker: FC<{
-  position: TargetLocation;
+const FeedLocationMarker: FC<{
+  position: FeedLocation;
   colorScheme?: ColorScheme;
 }> = ({ position, colorScheme = colorSchemes.green }) => {
   return (
@@ -160,17 +160,11 @@ const MapPosition: FC<{ mapPosition: [number, number] }> = ({
 
 export interface Props {
   locations: Location[];
-  targetLocation?: TargetLocation;
-  feedLocations?: TargetLocation[];
+  feedLocations?: FeedLocation[];
   mapFocus: LocationWithoutTime | undefined;
 }
 
-const Map: FC<Props> = ({
-  locations,
-  feedLocations,
-  targetLocation,
-  mapFocus,
-}) => {
+const Map: FC<Props> = ({ locations, feedLocations, mapFocus }) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -201,11 +195,10 @@ const Map: FC<Props> = ({
             position={position}
           />
         ))}
-        {targetLocation && <TargetLocationMarker position={targetLocation} />}
         {feedLocations &&
           feedLocations.map((position, index) => {
             return (
-              <TargetLocationMarker
+              <FeedLocationMarker
                 position={position}
                 key={index}
                 colorScheme={colorSchemes.teal}
