@@ -29,7 +29,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          editUrl: "https://github.com/tea-lover-418/safe-travels/apps/docs",
+          editUrl:
+            "https://github.com/tea-lover-418/safe-travels/tree/main/apps/docs",
         },
         blog: {
           showReadingTime: true,
