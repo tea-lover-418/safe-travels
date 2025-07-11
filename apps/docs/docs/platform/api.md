@@ -78,7 +78,7 @@ Retrieve a bucket URL for uploading images
 
 `Authorization: bearer token`
 
-### Body
+#### Body
 
 ```json
 {
