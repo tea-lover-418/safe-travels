@@ -1,12 +1,12 @@
 > [!IMPORTANT]
-> Safe Travels is undergoing it's first beta test.
-> Follow it on [travels.stijndeligt.com](https://travels.stijndeligt.com)
+> Safe Travels is not yet ready for general use.
+> Feel free to take a professional interest or contribute, but consider the application to be in early beta.
 
-# Safe Travels
+# [Safe Travels](https:safe-travels.app)
 
-Safe Travels is a privacy oriented travel platform for self hosting.
+Safe Travels is a privacy oriented travel platform for self hosting. Check out the [public demo](https://travels.stijndeligt.com), or our [documentation](https:safe-travels.app/docs)
 
-![Quick overview of SafeTravels](https://raw.githubusercontent.com/tea-lover-418/safe-travels/refs/heads/main/public/github_hero.png)
+![Hero of SafeTravels](https://raw.githubusercontent.com/tea-lover-418/safe-travels/refs/heads/main/public/github_hero.png)
 
 ## Features
 
