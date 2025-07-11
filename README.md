@@ -50,6 +50,9 @@ Object storage: [Cloudflare R2](https://developers.cloudflare.com/r2/pricing/)
 
 Create a `.env` in `apps/web` based on the `.env.example`.
 
+- localhost:3000 will run apps/web
+- localhost:3001 will run apps/docs
+
 ### Web
 
 `npm i` & `npm run dev` should take care of everything.
@@ -60,11 +63,11 @@ Make sure you are also running web, as this contains the API.
 
 ### Apps and Packages
 
-- `apps/docs`: (under construction) a future docusaurus app.
+- `apps/docs`: a docusaurus app serving as the main website of safe travels.
 - `apps/quick-setup`: (under construction) a cli tool that can set up your database and hosting.
 - `apps/web`: the web app that visualizes your journey.
 - `apps/android`: the android app for personal tracking and updating your feed.
 
 - `packages/models`: Shared API models for all apps.
-- `packages/eslint-config`: eslint configurations
+- `packages/eslint-config`: eslint configurations.
 - `packages/typescript-config`: tsconfig's used throughout the monorepo.
