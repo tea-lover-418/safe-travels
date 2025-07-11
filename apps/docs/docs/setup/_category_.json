@@ -3,6 +3,6 @@
   "position": 2,
   "link": {
     "type": "generated-index",
-    "description": "Setting up your own SafeTravels platform"
+    "description": "There are two ways you can set up the environment. Using the CLI is the fastest and easiest, but has no room for customization. You can also manually set up the environment, and potentially swap out providers, but you will need some knowledge about the platform."
   }
 }

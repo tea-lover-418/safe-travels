@@ -14,10 +14,10 @@ export async function POST(request: Request) {
 
   const data = (await request.json()) as FeedItem;
 
-  if (!data?.type) {
+  if (!data?.type || !data?.title) {
     return new Response(undefined, {
       status: 400,
-      statusText: "missing required type of feed item",
+      statusText: "missing required type and title of feed item",
     });
   }
 
@@ -28,8 +28,6 @@ export async function POST(request: Request) {
     ),
     timestamp: new Date().toISOString() /** UTC */,
   };
-
-  console.info("inserting", feedItem);
 
   const res = await insertFeed(feedItem);
 
