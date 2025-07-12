@@ -28,6 +28,10 @@ The intent behind these features is to make the platform useable for general use
 
 # Beyond
 
+### Offline tracking
+
+- When disconnected your app will no longer update your location. We can solve this by storing your location in a local cache, and pop this on the next worker that does have internet connection.
+
 ### Multi-journey
 
 - Right now safe travels supports one journey only. If you go
