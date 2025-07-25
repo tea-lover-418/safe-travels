@@ -23,7 +23,7 @@ export async function POST(request: Request) {
 
   const feedItem = {
     ...data,
-    images: data.images.map((filename: string) => `${serverConfig.r2?.publicUrl}/${filename}`),
+    images: data.images?.map((filename: string) => `${serverConfig.r2?.publicUrl}/${filename}`),
     timestamp: new Date().toISOString() /** UTC */,
   };
 

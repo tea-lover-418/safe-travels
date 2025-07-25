@@ -9,8 +9,8 @@ type FeedItemBase = {
 
 export type FeedImage = FeedItemBase & {
   type: 'FeedImage';
-  images: string[];
   title: string;
   description?: string;
+  images?: string[];
   location?: LocationWithoutTime;
 };
