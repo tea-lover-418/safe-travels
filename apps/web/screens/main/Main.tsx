@@ -12,7 +12,7 @@ type Props = {
   feed: FeedItem[];
 };
 
-export const Main: FC<Props> = ({ locations, feed }) => {
+export const MainScreen: FC<Props> = ({ locations, feed }) => {
   const [mapFocus, setMapFocus] = useState<
     | {
         key: string;

@@ -10,10 +10,10 @@ export async function getDbClient(): Promise<Db> {
   }
 
   try {
-    mongoClient = new MongoClient(serverConfig.dbUrl);
+    mongoClient = new MongoClient(serverConfig.database.dbUrl);
 
     await mongoClient.connect();
-    db = mongoClient.db(serverConfig.dbName);
+    db = mongoClient.db(serverConfig.database.dbName);
 
     return db;
   } catch (error) {

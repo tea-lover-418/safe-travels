@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { findLocations } from '../db/location';
 import { findFeed } from '../db/feed';
 
-import { NoDataScreen, Main } from '../screens';
+import { NoDataScreen, MainScreen } from '../screens';
 
 export const revalidate = 10;
 
@@ -26,7 +26,7 @@ export default async function Home() {
     return <NoDataScreen />;
   }
 
-  return <Main locations={data.locations} feed={data.feed} />;
+  return <MainScreen locations={data.locations} feed={data.feed} />;
 }
 
 export const generateMetadata = async (): Promise<Metadata> => {

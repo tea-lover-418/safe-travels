@@ -1,0 +1,27 @@
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  padding-top: 50px;
+  gap: 80px
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .content {
+    overflow-y: initial;
+    width: 100%;
+    height: 50%;
+    padding-top: 12px;
+    gap: 24px;
+  }
+}

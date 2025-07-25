@@ -11,6 +11,7 @@
     "R2_ENDPOINT",
     "R2_ACCESS_KEY_ID",
     "R2_SECRET_ACCESS_KEY",
+    "PUBLIC_PASSWORD"
   ],
   "tasks": {
     "build": {

@@ -20,7 +20,6 @@ const seedLocations = async (url: string, apiToken: string) => {
 };
 
 const seedFeed = async (url: string, apiToken: string) => {
-  console.log(url, apiToken);
   await Promise.all(
     feedSeed.map(async feed => {
       console.log('tried to insert', feed);
