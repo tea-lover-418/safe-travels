@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D52440E22E3384EA003FACB7 /* FactoryKit in Frameworks */ = {isa = PBXBuildFile; productRef = D52440E12E3384EA003FACB7 /* FactoryKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D58125E02E1E8A1800241DF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,9 +25,22 @@
 		D58125DF2E1E8A1800241DF1 /* SafeTravelsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SafeTravelsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D52440D52E3380D6003FACB7 /* Exceptions for "SafeTravels" folder in "SafeTravels" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = D58125CF2E1E8A1600241DF1 /* SafeTravels */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D58125D22E1E8A1600241DF1 /* SafeTravels */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D52440D52E3380D6003FACB7 /* Exceptions for "SafeTravels" folder in "SafeTravels" target */,
+			);
 			path = SafeTravels;
 			sourceTree = "<group>";
 		};
@@ -39,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D52440E22E3384EA003FACB7 /* FactoryKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +108,7 @@
 			);
 			name = SafeTravels;
 			packageProductDependencies = (
+				D52440E12E3384EA003FACB7 /* FactoryKit */,
 			);
 			productName = SafeTravels;
 			productReference = D58125D02E1E8A1600241DF1 /* SafeTravels.app */;
@@ -143,9 +162,13 @@
 			knownRegions = (
 				en,
 				Base,
+				nl,
 			);
 			mainGroup = D58125C72E1E8A1600241DF1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D52440E02E3384EA003FACB7 /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D58125D12E1E8A1600241DF1 /* Products */;
 			projectDirPath = "";
@@ -260,7 +283,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -317,6 +342,8 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -332,8 +359,11 @@
 				DEVELOPMENT_TEAM = 9FMSV8A6D5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SafeTravels/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SafeTravels;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To provide automatic location tracking of visited locations for your trip";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To add locations to your trip";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -367,8 +397,11 @@
 				DEVELOPMENT_TEAM = 9FMSV8A6D5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SafeTravels/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SafeTravels;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To provide automatic location tracking of visited locations for your trip";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To add locations to your trip";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -460,6 +493,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D52440E02E3384EA003FACB7 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D52440E12E3384EA003FACB7 /* FactoryKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D52440E02E3384EA003FACB7 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = FactoryKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D58125C82E1E8A1600241DF1 /* Project object */;
 }

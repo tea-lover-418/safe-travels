@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainView: View {
+    @AppStorage("isPresentingOnboarding") var isPresentingOnboarding = true
+
     var body: some View {
         TabView {
             Tab("Map", systemImage: "map") {
@@ -19,6 +21,11 @@ struct MainView: View {
             Tab("Settings", systemImage: "gear") {
                 SettingsView()
             }
+        }
+        .sheet(isPresented: $isPresentingOnboarding) {
+            OnboardingView()
+                .padding(.top)
+                .interactiveDismissDisabled()
         }
     }
 }

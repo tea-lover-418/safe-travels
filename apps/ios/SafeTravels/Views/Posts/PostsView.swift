@@ -11,9 +11,10 @@ import SwiftData
 struct PostsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Post]
+    @State var presentWritePostView = false
 
     var body: some View {
-        NavigationSplitView {
+        NavigationStack {
             List {
                 ForEach(items) { item in
                     NavigationLink {
@@ -24,26 +25,34 @@ struct PostsView: View {
                 }
                 .onDelete(perform: deleteItems)
             }
+            .overlay {
+                if items.isEmpty {
+                    ContentUnavailableView(
+                        "No Posts",
+                        systemImage: "book.pages.fill",
+                        description: Text("You haven't added any posts yet. Tap the plus button to add a new post.")
+                    )
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    Button {
+                        presentWritePostView = true
+                    } label: {
+                        Label("Compose", systemImage: "square.and.pencil")
                     }
                 }
             }
             .navigationTitle("Posts")
-        } detail: {
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Post(title: "Hello World", body: "This is the _body_", timestamp: .now, location: .example)
-            modelContext.insert(newItem)
+            .sheet(isPresented: $presentWritePostView) {
+                NavigationStack {
+                    PostComposeView()
+                }
+                .interactiveDismissDisabled()
+            }
         }
     }
 
@@ -57,5 +66,9 @@ struct PostsView: View {
 }
 
 #Preview(traits: .modifier(SampleData())) {
+    PostsView()
+}
+
+#Preview("Empty") {
     PostsView()
 }

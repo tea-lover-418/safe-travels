@@ -45,17 +45,8 @@ struct MapView: View {
                         }
                         .pickerStyle(.segmented)
                     }
-                    ToolbarItem {
-                        Button(action: addLocation) {
-                            Label("Add location", systemImage: "plus")
-                        }
-                    }
                 }
         }
-    }
-
-    func addLocation() {
-
     }
 }
 
@@ -88,49 +79,6 @@ struct LocationMapView: View {
 
 extension CLLocationCoordinate2D {
     static let q42 = CLLocationCoordinate2D(latitude: 52.0676294, longitude: 4.3464126)
-}
-
-struct LocationListView: View {
-    var locations: [Location]
-
-    var sections: [LocationSection] {
-        let dict = Dictionary(grouping: locations, by: { location in
-            location.timestamp.formatted(date: .numeric, time: .omitted)
-        })
-        return dict.map { key, locations in
-            let locations = locations.sorted(by: { $0.timestamp < $1.timestamp })
-            let firstLocation = locations.first!
-            let title = firstLocation.timestamp.formatted(date: .complete, time: .omitted)
-            return LocationSection(id: key, timestamp: firstLocation.timestamp, title: title, locations: locations)
-        }
-    }
-
-    var body: some View {
-        List {
-            ForEach(sections) { section in
-                Section(section.title) {
-                    ForEach(section.locations) { location in
-                        LocationCell(location: location)
-                    }
-                }
-            }
-        }
-    }
-}
-
-struct LocationSection: Identifiable {
-    let id: String
-    let timestamp: Date
-    let title: String
-    let locations: [Location]
-}
-
-struct LocationCell: View {
-    var location: Location
-
-    var body: some View {
-        Text("\(location.latitude),\(location.longitute)")
-    }
 }
 
 #Preview(traits: .modifier(SampleData())) {

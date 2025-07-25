@@ -5,26 +5,18 @@
 //  Created by Mathijs Bernson on 09/07/2025.
 //
 
+import FactoryKit
 import SwiftUI
 import SwiftData
 
 @main
 struct SafeTravelsApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([Trip.self, Post.self, Location.self])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @UIApplicationDelegateAdaptor var appDelegate: SafeTravelsAppDelegate
 
     var body: some Scene {
         WindowGroup {
             MainView()
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(Container.shared.sharedModelContainer())
     }
 }
