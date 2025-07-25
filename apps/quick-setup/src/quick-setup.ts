@@ -1,4 +1,4 @@
-import { program } from "commander";
+import { program } from 'commander';
 
 /** Under construction
  *
@@ -11,8 +11,8 @@ import { program } from "commander";
  */
 
 program
-  .version("1.0.0")
-  .description("Safe Travels - Quick setup CLI")
+  .version('1.0.0')
+  .description('Safe Travels - Quick setup CLI')
   .action(() => {
     console.log(`This CLI is still under construction!`);
   });

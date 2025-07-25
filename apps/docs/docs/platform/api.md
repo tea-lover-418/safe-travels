@@ -49,10 +49,7 @@ Post a new update or activity. Users create feed updates in the apps, and submit
 ```json
 {
   "type": "FeedImage", // "currently the only supported type"
-  "images": [
-    "https://example.com/image1.jpg",
-    "https://example.com/image2.jpg"
-  ], // optional
+  "images": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"], // optional
   "title": "New Update",
   "decription": "A brief description of the update", // optional
   "location": {

@@ -1,6 +1,6 @@
-import { Location } from "@safe-travels/models";
-import { getDbClient } from ".";
-import { locationCollection } from "./collections";
+import { Location } from '@safe-travels/models';
+import { getDbClient } from '.';
+import { locationCollection } from './collections';
 
 export const insertLocation = async (location: Location) => {
   const db = await getDbClient();
@@ -11,10 +11,7 @@ export const insertLocation = async (location: Location) => {
 export const findLocations = async () => {
   const db = await getDbClient();
 
-  const locations = await db
-    .collection<Location>(locationCollection)
-    .find({})
-    .toArray();
+  const locations = await db.collection<Location>(locationCollection).find({}).toArray();
 
   return locations;
 };

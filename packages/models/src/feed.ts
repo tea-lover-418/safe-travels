@@ -1,4 +1,4 @@
-import { LocationWithoutTime } from "./location";
+import { LocationWithoutTime } from './location';
 
 export type FeedItem = FeedImage;
 
@@ -8,7 +8,7 @@ type FeedItemBase = {
 };
 
 export type FeedImage = FeedItemBase & {
-  type: "FeedImage";
+  type: 'FeedImage';
   images: string[];
   title: string;
   description?: string;

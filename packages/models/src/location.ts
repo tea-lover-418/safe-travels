@@ -4,7 +4,7 @@ export interface Location {
   timestamp: string;
 }
 
-export type LocationWithoutTime = Omit<Location, "timestamp">;
+export type LocationWithoutTime = Omit<Location, 'timestamp'>;
 
 export type FeedLocation = LocationWithoutTime & {
   name: string;

@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import styles from "./NoData.module.css";
+import styles from './NoData.module.css';
 
 export const NoDataScreen: FC = () => {
   return (

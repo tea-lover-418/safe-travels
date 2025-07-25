@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import styles from "./Main.module.css";
-import { FC, useState } from "react";
+import styles from './Main.module.css';
+import { FC, useState } from 'react';
 
-import { Map, Feed, OpenSourceNotice } from "../../components";
+import { Map, Feed, OpenSourceNotice } from '../../components';
 
-import { LocationWithoutTime, Location, FeedItem } from "@safe-travels/models";
+import { LocationWithoutTime, Location, FeedItem } from '@safe-travels/models';
 
 type Props = {
   locations: Location[];
@@ -20,7 +20,7 @@ export const Main: FC<Props> = ({ locations, feed }) => {
       }
     | undefined
   >({
-    key: "",
+    key: '',
     position: locations[locations.length - 1] || { latitude: 0, longitude: 0 },
   });
 
@@ -36,7 +36,7 @@ export const Main: FC<Props> = ({ locations, feed }) => {
               }
               return { ...location, name: title };
             })
-            .filter((val) => !!val)}
+            .filter(val => !!val)}
           mapFocus={mapFocus}
         />
       </div>

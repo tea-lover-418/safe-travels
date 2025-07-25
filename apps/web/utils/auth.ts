@@ -1,4 +1,4 @@
-import { serverConfig } from "../config";
+import { serverConfig } from '../config';
 
 export const isAuthorized = (token?: string | null) => {
   /** Auth is optional for now */

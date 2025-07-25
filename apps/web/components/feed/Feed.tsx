@@ -1,11 +1,11 @@
-import { FC } from "react";
-import Image from "next/image";
-import { FeedImage as FeedImageType, FeedItem } from "@safe-travels/models";
-import { LocationWithoutTime } from "@safe-travels/models";
+import { FC } from 'react';
+import Image from 'next/image';
+import { FeedImage as FeedImageType, FeedItem } from '@safe-travels/models';
+import { LocationWithoutTime } from '@safe-travels/models';
 
-import { formatDefault } from "../../utils/date";
+import { formatDefault } from '../../utils/date';
 
-import styles from "./Feed.module.css";
+import styles from './Feed.module.css';
 
 interface Props {
   feed: FeedItem[];
@@ -20,10 +20,7 @@ export const Feed: FC<Props> = ({ feed, setMapFocus }) => {
 
 export const FeedImage: FC<
   FeedImageType & {
-    setMapFocus: (mapFocus: {
-      key: string;
-      position: LocationWithoutTime;
-    }) => void;
+    setMapFocus: (mapFocus: { key: string; position: LocationWithoutTime }) => void;
   }
 > = ({ images, timestamp, title, description, location, setMapFocus }) => {
   if (!images?.length && !title) {
@@ -36,12 +33,7 @@ export const FeedImage: FC<
     <div>
       <div
         className={hasLocation ? styles.headerContainer : undefined}
-        onClick={
-          hasLocation
-            ? () => setMapFocus({ key: title, position: location })
-            : undefined
-        }
-      >
+        onClick={hasLocation ? () => setMapFocus({ key: title, position: location }) : undefined}>
         <h1>{title}</h1>
       </div>
 
@@ -59,7 +51,7 @@ export const FeedImage: FC<
                 unoptimized
                 width={0}
                 height={0}
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: '100%', height: '100%' }}
               />
             </div>
           );

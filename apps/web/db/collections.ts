@@ -1,2 +1,2 @@
-export const locationCollection = "locations";
-export const feedCollection = "feed";
+export const locationCollection = 'locations';
+export const feedCollection = 'feed';

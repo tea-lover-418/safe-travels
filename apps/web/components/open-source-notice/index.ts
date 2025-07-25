@@ -1,1 +1,1 @@
-export * from "./OSN";
+export * from './OSN';

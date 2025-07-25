@@ -1,11 +1,7 @@
-import {
-  LocationWithoutTime,
-  Location,
-  FeedLocation,
-} from "@safe-travels/models";
-import { FC } from "react";
-import { calculateDistance } from "../../utils/coordinates";
-import styles from "./Distance.module.css";
+import { LocationWithoutTime, Location, FeedLocation } from '@safe-travels/models';
+import { FC } from 'react';
+import { calculateDistance } from '../../utils/coordinates';
+import styles from './Distance.module.css';
 
 /** Currently not in used, will be part of a Feed re-do */
 export const Distance: FC<{
@@ -28,10 +24,7 @@ export const Distance: FC<{
 
   return (
     <div>
-      <div
-        className={styles.headerContainer}
-        onClick={() => setMapFocus(targetLocation)}
-      >
+      <div className={styles.headerContainer} onClick={() => setMapFocus(targetLocation)}>
         <h1>{targetLocation.name}</h1>
       </div>
       <h2>{displayDistance(distance)} to go</h2>

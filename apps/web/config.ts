@@ -1,7 +1,7 @@
 const getServerConfig = () => {
   return {
-    dbUrl: requireEnv("MONGODB_CONNECTION_STRING"),
-    dbName: requireEnv("MONGO_DB_NAME"),
+    dbUrl: requireEnv('MONGODB_CONNECTION_STRING'),
+    dbName: requireEnv('MONGO_DB_NAME'),
     apiToken: process.env.API_TOKEN,
     home: process.env.HOME_COORDS,
     r2: getR2Config(),

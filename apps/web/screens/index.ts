@@ -1,2 +1,2 @@
-export * from "./main";
-export * from "./no-data";
+export * from './main';
+export * from './no-data';

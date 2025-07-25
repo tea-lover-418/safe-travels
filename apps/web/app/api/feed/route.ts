@@ -1,10 +1,10 @@
-import { serverConfig } from "../../../config";
-import { insertFeed } from "../../../db/feed";
-import { isAuthorized } from "../../../utils/auth";
-import { FeedItem } from "@safe-travels/models";
+import { serverConfig } from '../../../config';
+import { insertFeed } from '../../../db/feed';
+import { isAuthorized } from '../../../utils/auth';
+import { FeedItem } from '@safe-travels/models';
 
 export async function POST(request: Request) {
-  const token = request.headers.get("Authorization");
+  const token = request.headers.get('Authorization');
 
   if (!isAuthorized(token)) {
     return new Response(undefined, {
@@ -17,15 +17,13 @@ export async function POST(request: Request) {
   if (!data?.type || !data?.title) {
     return new Response(undefined, {
       status: 400,
-      statusText: "missing required type and title of feed item",
+      statusText: 'missing required type and title of feed item',
     });
   }
 
   const feedItem = {
     ...data,
-    images: data.images.map(
-      (filename: string) => `${serverConfig.r2?.publicUrl}/${filename}`
-    ),
+    images: data.images.map((filename: string) => `${serverConfig.r2?.publicUrl}/${filename}`),
     timestamp: new Date().toISOString() /** UTC */,
   };
 
@@ -34,7 +32,7 @@ export async function POST(request: Request) {
   if (!res.acknowledged) {
     return new Response(undefined, {
       status: 500,
-      statusText: "could not save feedItem",
+      statusText: 'could not save feedItem',
     });
   }
 

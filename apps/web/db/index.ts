@@ -1,5 +1,5 @@
-import { Db, MongoClient } from "mongodb";
-import { serverConfig } from "../config";
+import { Db, MongoClient } from 'mongodb';
+import { serverConfig } from '../config';
 
 let mongoClient: MongoClient;
 let db: Db;

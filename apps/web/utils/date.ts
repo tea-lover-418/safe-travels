@@ -1,6 +1,6 @@
-import dayjs from "dayjs";
-import relativeTimePlugin from "dayjs/plugin/relativeTime";
-import isTodayPlugin from "dayjs/plugin/isToday";
+import dayjs from 'dayjs';
+import relativeTimePlugin from 'dayjs/plugin/relativeTime';
+import isTodayPlugin from 'dayjs/plugin/isToday';
 
 dayjs.extend(relativeTimePlugin);
 dayjs.extend(isTodayPlugin);

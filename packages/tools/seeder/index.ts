@@ -1,30 +1,30 @@
-import { program } from "commander";
-import dotenv from "dotenv";
-import { feedSeed, locationSeed } from "./seed";
+import { program } from 'commander';
+import dotenv from 'dotenv';
+import { feedSeed, locationSeed } from './seed';
 
 dotenv.config();
 
 const seedLocations = async (url: string, apiToken: string) => {
   await Promise.all(
-    locationSeed.map(async (location) => {
+    locationSeed.map(async location => {
       await fetch(`${url}/api/location`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: apiToken,
         },
         body: JSON.stringify(location),
       });
-    })
+    }),
   );
 };
 
 const seedFeed = async (url: string, apiToken: string) => {
   console.log(url, apiToken);
   await Promise.all(
-    feedSeed.map(async (feed) => {
-      console.log("tried to insert", feed);
-    })
+    feedSeed.map(async feed => {
+      console.log('tried to insert', feed);
+    }),
   );
 };
 
@@ -39,12 +39,12 @@ const seedFeed = async (url: string, apiToken: string) => {
  */
 
 program
-  .version("1.0.0")
-  .description("Safe Travels - Quick setup CLI")
+  .version('1.0.0')
+  .description('Safe Travels - Quick setup CLI')
   .action(() => {
     const { API_TOKEN, API_URL } = process.env;
     if (!API_TOKEN || !API_URL) {
-      console.error("Missing required .env values");
+      console.error('Missing required .env values');
       return;
     }
 

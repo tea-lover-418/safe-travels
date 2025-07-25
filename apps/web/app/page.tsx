@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Metadata } from "next";
-import { findLocations } from "../db/location";
-import { findFeed } from "../db/feed";
+import { Metadata } from 'next';
+import { findLocations } from '../db/location';
+import { findFeed } from '../db/feed';
 
-import { NoDataScreen, Main } from "../screens";
+import { NoDataScreen, Main } from '../screens';
 
 export const revalidate = 10;
 
@@ -31,6 +31,6 @@ export default async function Home() {
 
 export const generateMetadata = async (): Promise<Metadata> => {
   return {
-    title: "Safe Travels",
+    title: 'Safe Travels',
   };
 };

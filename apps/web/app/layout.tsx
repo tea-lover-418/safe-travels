@@ -1,24 +1,24 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from '@vercel/analytics/next';
 
-import "./globals.css";
+import './globals.css';
 
-import { Spectral, Inter } from "next/font/google";
+import { Spectral, Inter } from 'next/font/google';
 
 const serif = Spectral({
-  weight: "500",
-  subsets: ["latin"],
+  weight: '500',
+  subsets: ['latin'],
 });
 
 const sans = Inter({
-  weight: "300",
-  subsets: ["latin"],
+  weight: '300',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Safe Travels",
-  description: "Follow my travel diary!",
+  title: 'Safe Travels',
+  description: 'Follow my travel diary!',
 };
 
 export default function RootLayout({
@@ -29,9 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Analytics />
-      <body className={`${serif.className}, ${sans.className}`}>
-        {children}
-      </body>
+      <body className={`${serif.className}, ${sans.className}`}>{children}</body>
     </html>
   );
 }
