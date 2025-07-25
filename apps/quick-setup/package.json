@@ -8,7 +8,8 @@
   "scripts": {
     "start": "tsx ./src/quick-setup",
     "lint": "eslint . --max-warnings 0",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf node_modules .turbo"
   },
   "dependencies": {
     "commander": "^14.0.0",

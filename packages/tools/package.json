@@ -5,6 +5,7 @@
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "check-types": "tsc --noEmit",
+    "clean": "rm -rf node_modules .turbo",
     "seed": "tsx ./seeder/index"
   },
   "dependencies": {

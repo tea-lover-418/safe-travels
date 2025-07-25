@@ -14,6 +14,7 @@
     "PUBLIC_PASSWORD"
   ],
   "tasks": {
+    "clean": {},
     "build": {
       "dependsOn": [
         "^build"

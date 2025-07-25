@@ -9,6 +9,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
     "check": "turbo run lint check-types",
+    "clean": "turbo clean",
     "quick-setup": "npm start -w apps/quick-setup"
   },
   "devDependencies": {
