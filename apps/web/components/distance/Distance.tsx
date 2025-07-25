@@ -5,7 +5,7 @@ import {
 } from "@safe-travels/models/location";
 import { FC } from "react";
 import { calculateDistance } from "../../utils/coordinates";
-import styles from "./distance.module.css";
+import styles from "./Distance.module.css";
 
 /** Currently not in used, will be part of a Feed re-do */
 export const Distance: FC<{

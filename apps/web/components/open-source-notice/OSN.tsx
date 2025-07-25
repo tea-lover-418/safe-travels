@@ -1,4 +1,4 @@
-import styles from "./oss.module.css";
+import styles from "./OSN.module.css";
 
 export const OpenSourceNotice = () => {
   return (

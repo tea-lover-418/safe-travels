@@ -27,7 +27,7 @@ import {
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 
 import "leaflet/dist/leaflet.css";
-import { isToday, formatDefault } from "../utils/date";
+import { isToday, formatDefault } from "../../utils/date";
 
 const colorSchemes = {
   blue: {

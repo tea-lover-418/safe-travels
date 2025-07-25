@@ -4,10 +4,11 @@ import {
   FeedImage as FeedImageType,
   FeedItem,
 } from "@safe-travels/models/feed";
-
-import styles from "./feed.module.css";
-import { formatDefault } from "../../utils/date";
 import { LocationWithoutTime } from "@safe-travels/models/location";
+
+import { formatDefault } from "../../utils/date";
+
+import styles from "./Feed.module.css";
 
 interface Props {
   feed: FeedItem[];

@@ -1,8 +1,8 @@
 import { FC } from "react";
 
-import styles from "./StartTrackingScreen.module.css";
+import styles from "./NoData.module.css";
 
-export const StartTrackingScreen: FC = () => {
+export const NoDataScreen: FC = () => {
   return (
     <div className={styles.container}>
       <h1>Start tracking your progress!</h1>
