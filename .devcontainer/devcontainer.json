@@ -23,14 +23,17 @@
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     "forwardPorts": [
-        3000
+        3000,
+        3001
     ],
     // Use 'portsAttributes' to set default properties for specific forwarded ports.
     // More info: https://containers.dev/implementors/json_reference/#port-attributes
     "portsAttributes": {
         "3000": {
-            "label": "Web app",
-            "onAutoForward": "openPreview"
+            "label": "Frontend"
+        },
+        "3001": {
+            "label": "Docusaurus"
         }
     },
     // Use 'postCreateCommand' to run commands after the container is created.
