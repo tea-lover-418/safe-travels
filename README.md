@@ -48,14 +48,13 @@ Object storage: [Cloudflare R2](https://developers.cloudflare.com/r2/pricing/)
 
 ## Local Development
 
+### Web
+
 Create a `.env` in `apps/web` based on the `.env.example`.
+`npm i` & `npm run dev` should take care of everything.
 
 - localhost:3000 will run apps/web
 - localhost:3001 will run apps/docs
-
-### Web
-
-`npm i` & `npm run dev` should take care of everything.
 
 ### Android
 
@@ -71,3 +70,10 @@ Make sure you are also running web, as this contains the API.
 - `packages/models`: Shared API models for all apps.
 - `packages/eslint-config`: eslint configurations.
 - `packages/typescript-config`: tsconfig's used throughout the monorepo.
+
+### Recommended extensions
+
+#### VSCode
+
+- Prettier - Code formatter - _by Prettier_
+- ESLint - _by Microsoft_
