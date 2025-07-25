@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Metadata } from 'next';
 import { LoginScreen } from '../../screens/login';
 

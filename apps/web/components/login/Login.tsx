@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import styles from './Login.module.css';
 
-const LoginForm: React.FC = () => {
+export const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<undefined | string>();
   const router = useRouter();
@@ -53,5 +53,3 @@ const LoginForm: React.FC = () => {
     </form>
   );
 };
-
-export default LoginForm;
