@@ -8,6 +8,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
+    "check": "turbo run lint check-types",
     "quick-setup": "npm start -w apps/quick-setup"
   },
   "devDependencies": {

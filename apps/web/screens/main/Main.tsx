@@ -1,11 +1,11 @@
 "use client";
 
-import styles from "./main.module.css";
+import styles from "./Main.module.css";
 
-import { Map } from "../components/Map";
-import { Feed } from "../components/feed";
-import { OpenSourceNotice } from "../components/open-source-notice";
-import { FC, useEffect, useState } from "react";
+import { Map } from "../../components/Map";
+import { Feed } from "../../components/feed";
+import { OpenSourceNotice } from "../../components/open-source-notice";
+import { FC, useState } from "react";
 import { LocationWithoutTime, Location } from "@safe-travels/models/location";
 import { FeedItem } from "@safe-travels/models/feed";
 

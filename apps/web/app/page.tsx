@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { findLocations } from "../db/location";
 import { findFeed } from "../db/feed";
 
-import { Main } from "../screens/Main";
+import { Main } from "../screens/main/Main";
+import { StartTrackingScreen } from "../screens/start-tracking/StartTrackingScreen";
 
 export const revalidate = 10;
 
@@ -20,6 +21,10 @@ export type HomePageData = Awaited<ReturnType<typeof getData>>;
 
 export default async function Home() {
   const data = await getData();
+
+  if (!data.locations?.length) {
+    return <StartTrackingScreen />;
+  }
 
   return <Main locations={data.locations} feed={data.feed} />;
 }
