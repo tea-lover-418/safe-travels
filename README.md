@@ -4,7 +4,7 @@
 
 # [Safe Travels](https://safe-travels.app)
 
-Safe Travels is a privacy oriented travel platform for self hosting. Check out the [public demo](https://travels.stijndeligt.com), or our [documentation](https:safe-travels.app/docs)
+Safe Travels is a privacy oriented travel platform for self hosting. Check out the [public demo](https://demo.safe-travels.app), or our [documentation](https:safe-travels.app/docs)
 
 ![Hero of SafeTravels](https://raw.githubusercontent.com/tea-lover-418/safe-travels/refs/heads/main/public/github_hero.png)
 
@@ -64,14 +64,19 @@ You can run `cd packages/tools && npm run seed -- --url "yourUrl" --apiToken "yo
 
 Make sure you are also running web, as this contains the API.
 
-### Apps and Packages
+### Repo structure
+
+#### Apps
 
 - `apps/docs`: a docusaurus app serving as the main website of safe travels.
 - `apps/quick-setup`: (under construction) a cli tool that can set up your database and hosting.
 - `apps/web`: the web app that visualizes your journey.
 - `apps/android`: the android app for personal tracking and updating your feed.
 
+#### Packages
+
 - `packages/models`: Shared API models for all apps.
+- `packages/tools`: Tools to set up and manage a local environment
 - `packages/eslint-config`: eslint configurations.
 - `packages/typescript-config`: tsconfig's used throughout the monorepo.
 
