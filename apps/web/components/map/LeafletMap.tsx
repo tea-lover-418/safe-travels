@@ -23,7 +23,7 @@ import {
   FeedLocation,
   Location,
   LocationWithoutTime,
-} from "@safe-travels/models/location";
+} from "@safe-travels/models";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 
 import "leaflet/dist/leaflet.css";

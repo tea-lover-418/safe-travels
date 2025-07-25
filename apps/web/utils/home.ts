@@ -1,4 +1,4 @@
-import { LocationWithoutTime } from "@safe-travels/models/location";
+import { LocationWithoutTime } from "@safe-travels/models";
 import { serverConfig } from "../config";
 
 const splitCoordinates = serverConfig.home?.split(",");

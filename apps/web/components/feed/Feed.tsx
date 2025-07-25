@@ -1,10 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
-import {
-  FeedImage as FeedImageType,
-  FeedItem,
-} from "@safe-travels/models/feed";
-import { LocationWithoutTime } from "@safe-travels/models/location";
+import { FeedImage as FeedImageType, FeedItem } from "@safe-travels/models";
+import { LocationWithoutTime } from "@safe-travels/models";
 
 import { formatDefault } from "../../utils/date";
 

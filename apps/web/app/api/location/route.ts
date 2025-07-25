@@ -1,4 +1,4 @@
-import { Location } from "@safe-travels/models/location";
+import { Location } from "@safe-travels/models";
 import { insertLocation } from "../../../db/location";
 import { isWithin100Meters } from "../../../utils/coordinates";
 import { home } from "../../../utils/home";

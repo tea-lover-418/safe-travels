@@ -5,8 +5,7 @@ import { FC, useState } from "react";
 
 import { Map, Feed, OpenSourceNotice } from "../../components";
 
-import { LocationWithoutTime, Location } from "@safe-travels/models/location";
-import { FeedItem } from "@safe-travels/models/feed";
+import { LocationWithoutTime, Location, FeedItem } from "@safe-travels/models";
 
 type Props = {
   locations: Location[];

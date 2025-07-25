@@ -1,7 +1,7 @@
 import { serverConfig } from "../../../config";
 import { insertFeed } from "../../../db/feed";
 import { isAuthorized } from "../../../utils/auth";
-import { FeedItem } from "@safe-travels/models/feed";
+import { FeedItem } from "@safe-travels/models";
 
 export async function POST(request: Request) {
   const token = request.headers.get("Authorization");

@@ -1,6 +1,6 @@
 import { getDbClient } from ".";
 import { feedCollection } from "./collections";
-import { FeedItem } from "@safe-travels/models/feed";
+import { FeedItem } from "@safe-travels/models";
 
 export const insertFeed = async (feedItem: FeedItem) => {
   const db = await getDbClient();

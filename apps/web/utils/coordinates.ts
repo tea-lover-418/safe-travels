@@ -1,4 +1,4 @@
-import { LocationWithoutTime } from "@safe-travels/models/location";
+import { LocationWithoutTime } from "@safe-travels/models";
 
 export const isWithin100Meters = (
   homeCoordinate: LocationWithoutTime,

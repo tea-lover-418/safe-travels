@@ -2,7 +2,7 @@ import {
   LocationWithoutTime,
   Location,
   FeedLocation,
-} from "@safe-travels/models/location";
+} from "@safe-travels/models";
 import { FC } from "react";
 import { calculateDistance } from "../../utils/coordinates";
 import styles from "./Distance.module.css";

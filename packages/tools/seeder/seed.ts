@@ -1,5 +1,4 @@
-import { Location } from "@safe-travels/models/location";
-import { FeedItem } from "@safe-travels/models/feed";
+import { Location, FeedItem } from "@safe-travels/models";
 
 export const locationSeed: Location[] = [
   {

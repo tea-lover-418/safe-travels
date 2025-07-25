@@ -1,4 +1,4 @@
-import { Location } from "@safe-travels/models/location";
+import { Location } from "@safe-travels/models";
 import { getDbClient } from ".";
 import { locationCollection } from "./collections";
 
