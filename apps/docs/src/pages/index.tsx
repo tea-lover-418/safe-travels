@@ -18,20 +18,27 @@ export default function Home(): ReactNode {
             {siteConfig.title}
           </Heading>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <div className={styles.buttons}>
+            <Link
+              className="button button--secondary button--lg"
+              to="/docs/intro"
+            >
+              Documentation
+            </Link>
+            <Link className="button button--secondary button--lg" to="/blog">
+              Blog
+            </Link>
+            <Link
+              className="button button--secondary button--lg"
+              to="https://demo.safe-travels.app"
+            >
+              Demo
+            </Link>
+          </div>
         </div>
       </header>
-      <main>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro"
-          >
-            Read the documentation
-          </Link>
-          <Link className="button button--secondary button--lg" to="/blog">
-            Check out the blog
-          </Link>
-        </div>
+      <main className={styles.main}>
+        <div className={styles.columns}></div>
       </main>
     </Layout>
   );

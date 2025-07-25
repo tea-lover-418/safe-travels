@@ -6,7 +6,6 @@ This roadmap is subject to many changes. The purpose is to reflect the intention
 
 The intent behind these features is to make the platform useable for general users.
 
-- Demo platform at https://demo.safetravels.app.
 - iOS app with basic support
 - Android refactor of config and globals
   - user feedback
@@ -31,6 +30,7 @@ The intent behind these features is to make the platform useable for general use
 ### Offline tracking
 
 - When disconnected your app will no longer update your location. We can solve this by storing your location in a local cache, and pop this on the next worker that does have internet connection.
+- Already supported in API.
 
 ### Multi-journey
 
