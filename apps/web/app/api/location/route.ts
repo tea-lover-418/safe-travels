@@ -28,7 +28,9 @@ export async function POST(request: Request) {
   const location: Location = {
     latitude: data.latitude,
     longitude: data.longitude,
-    timestamp: new Date().toISOString() /** UTC */,
+    timestamp: data.timestamp
+      ? new Date(data.timestamp).toUTCString()
+      : new Date().toISOString(),
   };
 
   /** Check if the location is too close to home */
@@ -38,8 +40,6 @@ export async function POST(request: Request) {
       statusText: "location rejected",
     });
   }
-
-  console.info("inserting", location);
 
   const res = await insertLocation(location);
 

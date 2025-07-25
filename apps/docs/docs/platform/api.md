@@ -21,7 +21,8 @@ Insert a new location as part of a trip. Apps will call this endpoint in the bac
 ```json
 {
   "latitude": 52.402515,
-  "longitude": 4.71076
+  "longitude": 4.71076,
+  "timestamp": "2025-06-13T07:19:16.820Z" // optional, the api will create one when empty
 }
 ```
 
