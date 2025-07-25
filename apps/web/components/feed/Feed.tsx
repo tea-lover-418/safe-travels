@@ -8,7 +8,7 @@ import { LocationWithoutTime } from "@safe-travels/models/location";
 
 import { formatDefault } from "../../utils/date";
 
-import styles from "./Feed2.module.css";
+import styles from "./Feed.module.css";
 
 interface Props {
   feed: FeedItem[];
