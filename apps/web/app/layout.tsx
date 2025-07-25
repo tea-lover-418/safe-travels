@@ -17,8 +17,8 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Stijn de Ligt - Travels",
-  description: "Follow Stijn on his journey to the Arctic Cirlce",
+  title: "Safe Travels",
+  description: "Follow my travel diary!",
 };
 
 export default function RootLayout({
