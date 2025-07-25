@@ -25,6 +25,7 @@ Privacy is a cornerstone of SafeTravels. While many platforms collect and sell y
 Includes other safety features like:
 
 - Blocking location tracking near your home
+- Password protection of the main site
 
 ## Self hosting
 

@@ -23,7 +23,6 @@ The intent behind these features is to make the platform useable for general use
 
 - Add home location in app config
 - Add config as database model
-- Password protection of user facing website
 
 # Beyond
 
