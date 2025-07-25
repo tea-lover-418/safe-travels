@@ -1,13 +1,13 @@
 import { isAuthorized } from '../../../utils/auth';
 
-export async function POST(request: Request) {
+export async function GET(request: Request) {
   const token = request.headers.get('Authorization');
 
   if (!isAuthorized(token)) {
-    return new Response(undefined, {
+    return new Response('succes, unauthorized', {
       status: 401,
     });
   }
 
-  return new Response(undefined, { status: 200 });
+  return new Response('succes, authorized', { status: 200 });
 }
