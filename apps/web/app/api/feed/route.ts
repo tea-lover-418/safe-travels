@@ -36,5 +36,7 @@ export async function POST(request: Request) {
     });
   }
 
-  return new Response(undefined, { status: 200 });
+  const response = JSON.stringify({ id: res.insertedId.toString() });
+
+  return new Response(response, { status: 200 });
 }
