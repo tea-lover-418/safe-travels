@@ -2,7 +2,7 @@
 > Safe Travels is not yet ready for general use.
 > Feel free to take a professional interest or contribute, but consider the application to be in early beta.
 
-# [Safe Travels](https:safe-travels.app)
+# [Safe Travels](https://safe-travels.app)
 
 Safe Travels is a privacy oriented travel platform for self hosting. Check out the [public demo](https://travels.stijndeligt.com), or our [documentation](https:safe-travels.app/docs)
 
