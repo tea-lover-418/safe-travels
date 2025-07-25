@@ -58,7 +58,7 @@ Create a `.env` in `apps/web` based on the `.env.example`.
 
 #### Seeding data
 
-You can run `cd packages/tools && npm run seed -- --url "yourUrl" --apiToken "yourApiToken"` to seed you own environment with test data. To clear it, remove your database.
+You can run `cd packages/tools && npm run seed` to seed you own environment with test data. To clear it, remove your database.
 
 ### Android
 
