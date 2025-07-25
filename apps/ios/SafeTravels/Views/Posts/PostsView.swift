@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  PostsView.swift
 //  SafeTravels
 //
 //  Created by Mathijs Bernson on 09/07/2025.
@@ -8,18 +8,18 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct PostsView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var items: [Post]
 
     var body: some View {
         NavigationSplitView {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        Text(item.title)
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        Text(item.title)
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -34,6 +34,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .navigationTitle("Posts")
         } detail: {
             Text("Select an item")
         }
@@ -41,7 +42,7 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
+            let newItem = Post(title: "Hello World", body: "This is the _body_", timestamp: .now, location: .example)
             modelContext.insert(newItem)
         }
     }
@@ -55,7 +56,6 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+#Preview(traits: .modifier(SampleData())) {
+    PostsView()
 }
