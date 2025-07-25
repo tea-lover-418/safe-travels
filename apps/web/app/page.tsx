@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Metadata } from "next";
 import { findLocations } from "../db/location";
 import { findFeed } from "../db/feed";

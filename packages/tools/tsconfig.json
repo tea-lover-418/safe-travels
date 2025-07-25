@@ -1,0 +1,5 @@
+{
+  "extends": "@safe-travels/typescript-config/base.json",
+  "include": ["seeder"],
+  "exclude": ["node_modules", "dist"]
+}

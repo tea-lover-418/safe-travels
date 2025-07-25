@@ -56,6 +56,10 @@ Create a `.env` in `apps/web` based on the `.env.example`.
 - localhost:3000 will run apps/web
 - localhost:3001 will run apps/docs
 
+#### Seeding data
+
+You can run `cd packages/tools && npm run seed -- --url "yourUrl" --apiToken "yourApiToken"` to seed you own environment with test data. To clear it, remove your database.
+
 ### Android
 
 Make sure you are also running web, as this contains the API.

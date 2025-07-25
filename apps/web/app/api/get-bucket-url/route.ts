@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     });
   }
 
-  const data = (await request.json()) as any;
+  const data = (await request.json()) as { filename?: string } | undefined;
 
   const filename = data?.filename;
 

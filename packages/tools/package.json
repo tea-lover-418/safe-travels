@@ -1,0 +1,21 @@
+{
+  "name": "@safe-travels/tools",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsc --noEmit",
+    "seed": "tsx ./seeder/index"
+  },
+  "dependencies": {
+    "commander": "^14.0.0",
+    "dotenv": "16.0.3"
+  },
+  "devDependencies": {
+    "@safe-travels/eslint-config": "*",
+    "@safe-travels/models": "*",
+    "@safe-travels/typescript-config": "*",
+    "eslint": "^9.27.0",
+    "typescript": "5.8.2"
+  }
+}
