@@ -1,0 +1,189 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Add current location" : {
+
+    },
+    "API Token" : {
+
+    },
+    "Automatic location tracking" : {
+
+    },
+    "Automatic tracking" : {
+
+    },
+    "Automatically track your location, showing your journey on the map." : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Compose" : {
+
+    },
+    "Configure server" : {
+
+    },
+    "Connection successful" : {
+
+    },
+    "Connection Test" : {
+
+    },
+    "Continue" : {
+
+    },
+    "Current Location" : {
+
+    },
+    "Debug settings" : {
+
+    },
+    "Delete data" : {
+
+    },
+    "Done" : {
+
+    },
+    "Enable location tracking" : {
+
+    },
+    "Error creating post" : {
+
+    },
+    "Error requesting location: %@" : {
+
+    },
+    "Error: %@" : {
+
+    },
+    "Export data" : {
+
+    },
+    "Export JSON" : {
+
+    },
+    "Failed to store credentials" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "If you want to change your settings later, you can do so in the Settings tab." : {
+
+    },
+    "Import data" : {
+
+    },
+    "Import from Polarsteps" : {
+
+    },
+    "Import sample data" : {
+
+    },
+    "Journaling" : {
+
+    },
+    "List" : {
+
+    },
+    "Location" : {
+
+    },
+    "Location tracking" : {
+
+    },
+    "Log current location" : {
+
+    },
+    "Map" : {
+
+    },
+    "Mode" : {
+
+    },
+    "No Posts" : {
+
+    },
+    "Not set" : {
+
+    },
+    "Ok" : {
+
+    },
+    "Posts" : {
+
+    },
+    "Privacy and data" : {
+
+    },
+    "Save" : {
+
+    },
+    "Self-hosted" : {
+
+    },
+    "Server" : {
+
+    },
+    "Server configuration" : {
+
+    },
+    "Server Configuration" : {
+
+    },
+    "Server URL" : {
+
+    },
+    "Set up later" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Setup complete" : {
+
+    },
+    "Test connection" : {
+
+    },
+    "Text" : {
+
+    },
+    "The privacy friendly travel diary, for self hosting." : {
+
+    },
+    "Title" : {
+
+    },
+    "Welcome to\nSafeTravels" : {
+
+    },
+    "Would you like SafeTravel to automatically track your location?" : {
+
+    },
+    "Write updates about your travels for your friends and loved ones." : {
+
+    },
+    "You are always in control of your data." : {
+
+    },
+    "You can now start using SafeTravels to track your journeys and share them with others." : {
+
+    },
+    "You can use markdown: _\\_italic\\__ **\\*\\*bold\\*\\***" : {
+
+    },
+    "You haven't added any posts yet. Tap the plus button to add a new post." : {
+
+    },
+    "You need to set up a SafeTravel server instance" : {
+
+    },
+    "Your journey will automatically be visible on your SafeTravel server, if you have configured one." : {
+
+    }
+  },
+  "version" : "1.0"
+}
