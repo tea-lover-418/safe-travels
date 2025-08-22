@@ -52,13 +52,36 @@ struct LocationCell: View {
 
 #Preview() {
     let locations: [Location] = [
-        Location(latitude: 50.60983378444855, longitude: 5.6122473534248885, timestamp: 1747054226),
-        Location(latitude: 50.59807296847049, longitude: 5.591885615145407, timestamp: 1747054579),
-        Location(latitude: 50.57662191805483, longitude: 5.60343545862064, timestamp: 1747055065),
-        Location(latitude: 50.57091996078432, longitude: 5.58613194153233, timestamp: 1747055394),
-        Location(latitude: 50.55768676511364, longitude: 5.575405749607888, timestamp: 1747055693),
-        Location(latitude: 50.54368183487146, longitude: 5.589546728884419, timestamp: 1747056033)
-
+        Location(
+            timestamp: Date(timeIntervalSince1970: 1747054226),
+            latitude: 50.60983378444855,
+            longitude: 5.6122473534248885
+        ),
+        Location(
+            timestamp: Date(timeIntervalSince1970: 1747054579),
+            latitude: 50.59807296847049,
+            longitude: 5.591885615145407
+        ),
+        Location(
+            timestamp: Date(timeIntervalSince1970: 1747055065),
+            latitude: 50.57662191805483,
+            longitude: 5.60343545862064
+        ),
+        Location(
+            timestamp: Date(timeIntervalSince1970: 1747055394),
+            latitude: 50.57091996078432,
+            longitude: 5.58613194153233
+        ),
+        Location(
+            timestamp: Date(timeIntervalSince1970: 1747055693),
+            latitude: 50.55768676511364,
+            longitude: 5.575405749607888
+        ),
+        Location(
+            timestamp: Date(timeIntervalSince1970: 1747056033),
+            latitude: 50.54368183487146,
+            longitude: 5.589546728884419
+        )
     ]
     NavigationStack {
         LocationListView(locations: locations)

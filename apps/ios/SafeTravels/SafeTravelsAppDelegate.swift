@@ -12,7 +12,13 @@ class SafeTravelsAppDelegate: NSObject, UIApplicationDelegate {
     @Injected(\.locationManager) private var locationManager
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        locationManager.start()
+
+        if UserDefaults.standard.isLocationTrackingEnabled {
+            locationManager.start()
+        } else {
+            locationManager.stop()
+        }
+
         return true
     }
 }

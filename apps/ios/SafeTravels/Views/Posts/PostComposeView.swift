@@ -19,7 +19,7 @@ struct PostComposeView: View {
 
         var location: Location? {
             if case .success(let clLocation) = self {
-                return Location(clLocation: clLocation)
+                return Location(clLocation: clLocation, source: .standard)
             } else {
                 return nil
             }

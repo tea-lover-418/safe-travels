@@ -24,12 +24,12 @@ struct OnboardingLocationPermissionView: View {
                 if locationManager.authorizationStatus == .notDetermined {
                     let _ = await locationManager.requestAuthorization()
                 }
-                locationManager.isLocationTrackingEnabled = true
+                locationManager.enableLocationTracking()
                 action()
             }
 
             Button("Set up later") {
-                locationManager.isLocationTrackingEnabled = false
+                locationManager.disableLocationTracking()
                 action()
             }
             .buttonStyle(.plain)

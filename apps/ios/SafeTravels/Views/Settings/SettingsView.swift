@@ -12,7 +12,9 @@ struct SettingsView: View {
     @Environment(\.modelContext) var context
     @InjectedObservable(\.credentialManager) var credentialManager
     @InjectedObservable(\.locationManager) var locationManager
-    @State var locationTrackingEnabled = true
+
+    @AppStorage(UserDefaultsKey.isLocationTrackingEnabled.rawValue)
+    var isLocationTrackingEnabled: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -30,7 +32,14 @@ struct SettingsView: View {
                 }
 
                 Section("Automatic tracking") {
-                    Toggle("Automatic location tracking", isOn: $locationManager.isLocationTrackingEnabled)
+                    Toggle("Automatic location tracking", isOn: $isLocationTrackingEnabled)
+                        .onChange(of: isLocationTrackingEnabled) { _, isEnabled in
+                            if isEnabled {
+                                locationManager.start()
+                            } else {
+                                locationManager.stop()
+                            }
+                        }
                 }
 
                 Section("Privacy and data") {
