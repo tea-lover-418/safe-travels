@@ -2,6 +2,12 @@ import { Location } from '@safe-travels/models';
 import { getDbClient } from '.';
 import { locationCollection } from './collections';
 
+export const insertLocations = async (locations: Location[]) => {
+  const db = await getDbClient();
+
+  return db.collection(locationCollection).insertMany(locations);
+};
+
 export const insertLocation = async (location: Location) => {
   const db = await getDbClient();
 
